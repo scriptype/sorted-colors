@@ -8,6 +8,6 @@ I wanted to create a tool to sort named CSS colors in a way that it shows relate
 
 - Back Icon is from [Iconfinder](https://www.iconfinder.com/icons/326518/arrow_back_icon)
 
-# About the repository
+## About the repository
 
 This tool was originally developed using CodePen.io online editor and this repository is an export of it. Original URL: [https://codepen.io/pavlovsk/pen/zYvbGKe](https://codepen.io/pavlovsk/pen/zYvbGKe).
