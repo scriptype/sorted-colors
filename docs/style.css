@@ -1,4 +1,4 @@
-:root {
+jroot {
   --show-info-duration: .3s; }
 
 body {
@@ -51,6 +51,8 @@ body {
   color: #333; }
 
 .hue-slider {
+  -webkit-appearance: none;
+  -moz-appearance: none;
   appearance: none;
   outline: none;
   position: relative;
@@ -66,6 +68,8 @@ body {
     height: 10px;
     background: linear-gradient(to right, red 0%, #ff8000 8.3%, yellow 16.6%, #80ff00 25%, lime 33.3%, #00ff80 41.6%, cyan 50%, #0080ff 58.3%, blue 66.6%, #8000ff 75%, magenta 83.3%, #ff0080 91.6%, red 100%); }
   .hue-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    -moz-appearance: none;
     appearance: none;
     display: block;
     width: 15px;
@@ -75,6 +79,8 @@ body {
     box-shadow: 0 0 0 2px white, 0 0 2px 3px #444;
     transition: all .3s; }
   .hue-slider::-moz-range-thumb {
+    -webkit-appearance: none;
+    -moz-appearance: none;
     appearance: none;
     display: block;
     width: 15px;
@@ -91,6 +97,8 @@ body {
     box-shadow: 0 0 0 3px white, 0 0 2px 4px hsl(calc(var(--pos) * 360), 100%, 50%); }
 
 .mono-toggle {
+  -webkit-appearance: none;
+  -moz-appearance: none;
   appearance: none;
   background: none;
   border: none;
@@ -137,6 +145,8 @@ body {
     display: grid;
     grid-auto-flow: column; }
     .chart .row .color-button {
+      -webkit-appearance: none;
+      -moz-appearance: none;
       appearance: none;
       background: none;
       border: none;
@@ -227,6 +237,8 @@ body {
     .color-info-row--alter {
       font-size: 1.8em; }
   .color-info-close-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
     appearance: none;
     background: none;
     border: none;
