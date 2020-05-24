@@ -1,0 +1,157 @@
+{
+  "name": "sorted-css-colors",
+  "version": "2020.4.0-21.25.57",
+  "private": false,
+  "license": "MIT",
+  "homepage": "https://codepen.io/pavlovsk/pen/zYvbGKe",
+  "scripts": {
+    "build": "gulp -f ./build/gulpfile.js --cwd ./ --continue",
+    "serve": "gulp serve -f ./build/gulpfile.js --cwd ./ --continue",
+    "task": "gulp -f ./build/gulpfile.js --cwd ./ --continue",
+    "tasks": "gulp --tasks-simple -f ./build/gulpfile.js --cwd ./ --continue"
+  },
+  "config": {
+    "srcDir": "src/",
+    "distDir": "dist/"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.26.7",
+    "del": "^4.1.1",
+    "glob": "^7.1.4",
+    "gulp": "^4.0.2",
+    "gulp-rename": "^1.4.0",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.2.3",
+    "webpack-dev-server": "^3.2.1",
+    "gulp-inject-partials": "^1.0.5",
+    "gulp-sass": "^4.0.2",
+    "node-sass": "^4.12.0",
+    "gulp-babel": "^8.0.0",
+    "@babel/core": "^7.4.5",
+    "@babel/plugin-proposal-class-properties": "^7.4.4",
+    "@babel/plugin-proposal-decorators": "^7.4.4",
+    "@babel/plugin-proposal-do-expressions": "^7.2.0",
+    "@babel/plugin-proposal-function-bind": "^7.2.0",
+    "@babel/plugin-proposal-function-sent": "^7.2.0",
+    "@babel/plugin-proposal-json-strings": "^7.2.0",
+    "@babel/plugin-proposal-logical-assignment-operators": "^7.2.0",
+    "@babel/plugin-transform-modules-commonjs": "^7.4.4",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.4.4",
+    "@babel/plugin-proposal-numeric-separator": "^7.2.0",
+    "@babel/plugin-proposal-optional-chaining": "^7.2.0",
+    "@babel/plugin-proposal-pipeline-operator": "^7.3.2",
+    "@babel/plugin-proposal-throw-expressions": "^7.2.0",
+    "@babel/plugin-syntax-jsx": "^7.2.0",
+    "@babel/plugin-transform-react-display-name": "^7.2.0",
+    "@babel/plugin-transform-react-jsx": "^7.3.0",
+    "gulp-autoprefixer": "^6.1.0"
+  },
+  "tasks": {
+    "partials": {
+      "order": 999,
+      "src": [
+        "**/*.template.html"
+      ],
+      "pipe": [
+        {
+          "require": "gulp-inject-partials",
+          "args": [
+            {
+              "removeTags": true,
+              "quiet": true,
+              "ignoreError": true
+            }
+          ]
+        }
+      ],
+      "rename": {
+        "find": ".template",
+        "replace": ""
+      },
+      "cleanup": [
+        "**/*.partial.html",
+        "**/*.template.html"
+      ]
+    },
+    "sass": {
+      "src": [
+        "**/*.sass",
+        "**/*.scss"
+      ],
+      "pipe": [
+        {
+          "require": "gulp-sass"
+        }
+      ],
+      "cleanup": true
+    },
+    "babel": {
+      "src": [
+        "**/*.js",
+        "**/*.babel"
+      ],
+      "pipe": [
+        {
+          "require": "gulp-babel"
+        }
+      ],
+      "cleanup": [
+        "**/*.babel"
+      ]
+    },
+    "autoprefixer": {
+      "order": 999,
+      "src": [
+        "**/*.css"
+      ],
+      "pipe": [
+        {
+          "require": "gulp-autoprefixer",
+          "args": [
+            {
+              "cascade": false
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "babel": {
+    "plugins": [
+      "@babel/plugin-proposal-class-properties",
+      [
+        "@babel/plugin-proposal-decorators",
+        {
+          "decoratorsBeforeExport": true
+        }
+      ],
+      "@babel/plugin-proposal-do-expressions",
+      "@babel/plugin-proposal-function-bind",
+      "@babel/plugin-proposal-function-sent",
+      "@babel/plugin-proposal-json-strings",
+      "@babel/plugin-proposal-logical-assignment-operators",
+      [
+        "@babel/plugin-transform-modules-commonjs",
+        {
+          "strictMode": false
+        }
+      ],
+      "@babel/plugin-proposal-nullish-coalescing-operator",
+      "@babel/plugin-proposal-numeric-separator",
+      "@babel/plugin-proposal-optional-chaining",
+      [
+        "@babel/plugin-proposal-pipeline-operator",
+        {
+          "proposal": "smart"
+        }
+      ],
+      "@babel/plugin-proposal-throw-expressions",
+      "@babel/plugin-syntax-jsx",
+      "@babel/plugin-transform-react-display-name",
+      "@babel/plugin-transform-react-jsx"
+    ]
+  },
+  "browserslist": [
+    "last 5 version"
+  ]
+}

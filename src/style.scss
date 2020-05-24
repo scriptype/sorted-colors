@@ -1,0 +1,460 @@
+@mixin slider-thumb {
+  appearance: none;
+  display: block;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: linear-gradient(
+    120deg,
+    #444 30%,
+    #111 100%
+  );
+  box-shadow:
+    0 0 0 2px white,
+    0 0 2px 3px #444;
+  transition: all .3s;
+}
+
+@mixin non-mono-slider-thumb-focus {
+  background: linear-gradient(
+    120deg,
+    hsl( calc(var(--pos) * 360), 90%, 50% ) 30%,
+    hsl( calc(var(--pos) * 360), 100%, 40% ) 100%
+  );
+  box-shadow:
+    0 0 0 3px white,
+    0 0 2px 4px hsl( calc(var(--pos) * 360), 100%, 50% );
+}
+
+@mixin button-reset {
+  appearance: none;
+  background: none;
+  border: none;
+  color: inherit;
+}
+
+:root {
+  --show-info-duration: .3s;
+}
+
+body {
+  --content-width: clamp(400px, 80vmin, 800px);
+  --font-size: clamp(14px, 3vmin, 20px);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font: normal var(--font-size)/1.4 helvetica, sans-serif;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.back-icon {
+  width: 16px;
+  height: 16px;
+}
+
+#colorsTable {
+  display: none;
+}
+
+.container {
+  position: relative;
+  padding: 2vmin;
+  top: -2vmin;
+  left: -2vmin;
+}
+
+.hue-control {
+  display: flex;
+  flex-direction: column;
+  width: var(--content-width);
+  margin-bottom: 1.5vmin;
+  font-size: .8em;
+
+  &-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    min-height: 1.1em;
+    margin-bottom: .75vmin;
+  }
+}
+
+.hue-value {
+  display: inline-block;
+  min-width: 4vmin;
+  text-align: center;
+}
+
+.tolerance-text {
+  font-size: .8em;
+  color: #333;
+}
+
+.hue-slider {
+  appearance: none;
+  outline: none;
+  position: relative;
+  flex: 1;
+  height: 8px;
+  margin-left: 2vmin;
+  border-radius: 5px;
+  transition: all .3s;
+  background: linear-gradient(
+    to right,
+    hsl(0, 80%, 70%) 0%,
+    hsl(30, 80%, 70%) 8.3%,
+    hsl(60, 80%, 70%) 16.6%,
+    hsl(90, 80%, 70%) 25%,
+    hsl(120, 80%, 70%) 33.3%,
+    hsl(150, 80%, 70%) 41.6%,
+    hsl(180, 80%, 70%) 50%,
+    hsl(210, 80%, 70%) 58.3%,
+    hsl(240, 80%, 70%) 66.6%,
+    hsl(270, 80%, 70%) 75%,
+    hsl(300, 80%, 70%) 83.3%,
+    hsl(330, 80%, 70%) 91.6%,
+    hsl(360, 80%, 70%) 100%
+  );
+
+  &.mono {
+    background: linear-gradient(
+      to bottom,
+      #444 0%,
+      #111 100%
+    );
+  }
+
+  &:not(.mono):focus {
+    height: 10px;
+    background: linear-gradient(
+      to right,
+      hsl(0, 100%, 50%) 0%,
+      hsl(30, 100%, 50%) 8.3%,
+      hsl(60, 100%, 50%) 16.6%,
+      hsl(90, 100%, 50%) 25%,
+      hsl(120, 100%, 50%) 33.3%,
+      hsl(150, 100%, 50%) 41.6%,
+      hsl(180, 100%, 50%) 50%,
+      hsl(210, 100%, 50%) 58.3%,
+      hsl(240, 100%, 50%) 66.6%,
+      hsl(270, 100%, 50%) 75%,
+      hsl(300, 100%, 50%) 83.3%,
+      hsl(330, 100%, 50%) 91.6%,
+      hsl(360, 100%, 50%) 100%
+    );
+  }
+
+  &::-webkit-slider-thumb {
+    @include slider-thumb;
+  }
+
+  &::-moz-range-thumb {
+    @include slider-thumb;
+  }
+
+  &:not(.mono):focus::-webkit-slider-thumb {
+    @include non-mono-slider-thumb-focus;
+  }
+
+  &:not(.mono):focus::-moz-range-thumb {
+    @include non-mono-slider-thumb-focus;
+  }
+}
+
+.mono-toggle {
+  @include button-reset;
+  outline: none;
+
+  width: 15px;
+  height: 15px;
+  margin-left: 2vmin;
+  border-radius: 50%;
+  transition: background-position .2s;
+  cursor: pointer;
+  background-size: 200%;
+  background-image: linear-gradient(
+    to right,
+    white 24%,
+    #777 28%,
+    #777 70%,
+    white 74%
+  );
+  box-shadow:
+    0 0 0 1.5px white,
+    0 0 0 3px #777;
+
+  &:hover {
+    background-image: linear-gradient(
+      to right,
+      white 24%,
+      #333 28%,
+      #333 70%,
+      white 74%
+    );
+    box-shadow:
+      0 0 0 1.5px white,
+      0 0 0 3px #333;
+  }
+
+  &:active {
+    background-image: linear-gradient(
+      to right,
+      #f5f5f5 24%,
+      #888 28%,
+      #888 70%,
+      #f5f5f5 74%
+    );
+    box-shadow:
+      0 0 0 1.5px white,
+      0 0 0 3px #888;
+  }
+
+  &:checked,
+  &:checked:active {
+    background-position: 89% 0;
+    background-image: linear-gradient(
+      to right,
+      white 24%,
+      black 28%,
+      black 70%,
+      white 74%
+    );
+    box-shadow:
+      0 0 0 1.5px white,
+      0 0 0 3px black;
+  }
+
+  &:focus {
+    box-shadow:
+      0 0 0 1.5px white,
+      0 0 0 3px #333,
+      0 0 2.25px 6px rgba(black, .125);
+  }
+
+  &:checked:focus {
+    box-shadow:
+      0 0 0 1.5px white,
+      0 0 0 3px black,
+      0 0 2.25px 6px rgba(black, .25);
+  }
+}
+
+.chart-container {
+  position: relative;
+  width: var(--content-width);
+  height: var(--content-width);
+}
+
+.chart {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-auto-flow: row;
+
+  &.contain {
+    overflow: hidden;
+  }
+
+  .row {
+    display: grid;
+    grid-auto-flow: column;
+
+    .color-button {
+      @include button-reset;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: .6em;
+      text-transform: uppercase;
+      letter-spacing: .125em;
+      background: var(--background);
+      color: var(--color);
+      user-select: none;
+      cursor: pointer;
+      transition: transform .2s;
+
+      &:hover, &:focus {
+        outline: none;
+        transform: scale(1.04);
+        box-shadow: 3px 3px 10px rgba(#000, .125);
+      }
+      
+      &:active {
+        transform: scale(1.02);
+        box-shadow: 1px 1px 5px rgba(#000, .125);
+      }
+
+      &.active {
+        transition: transform .6s;
+      }
+
+      &.active,
+      &.deactivating {
+        transform: scale(16);
+        color: transparent;
+      }
+
+      &.deactivating {
+        animation: deactivate forwards calc(2 * var(--show-info-duration));
+      }
+
+      @keyframes deactivate {
+        from, 70% {
+          color: transparent;
+        }
+        to {
+          color: var(--color);
+          transform: scale(1);
+        }
+      }
+    }
+  }
+}
+
+.color-info {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transform: translateY(-5%) scale(.8);
+  transition:
+    opacity var(--show-info-duration),
+    transform var(--show-info-duration);
+
+  &.active {
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    transition-delay: var(--show-info-duration);
+  }
+
+  &-container {
+    --info-padding: 3em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%;
+    height: 70%;
+    padding: var(--info-padding);
+    box-sizing: border-box;
+    border: 1px solid;
+    font-size: .8em;
+    color: var(--color);
+    border-color: var(--color);
+  }
+
+  &-name {
+    font-size: 3em;
+    font-weight: 100;
+    line-height: 1.3;
+    margin-bottom: .33em;
+    overflow: hidden;
+  }
+
+  .marquee {
+    display: inline-block;
+    animation: marquee 4s 1s infinite;
+  }
+
+  @keyframes marquee {
+    from, 12%, 88%, to {
+      transform: translateX(0);
+    }
+    48%, 52% {
+      background: transparent;
+      transform: translateX(
+        calc( var(--marquee-amount) - .1em )
+      );
+    }
+  }
+
+  &-row {
+    font-size: 1.4em;
+    font-weight: 100;
+    margin-bottom: .33rem;
+    
+    &--alter {
+      font-size: 1.8em;
+    }
+
+    &--hex {}
+  }
+
+  &-close-button {
+    @include button-reset;
+
+    position: absolute;
+    bottom: 1em;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    font-size: 1.25em;
+    cursor: pointer;
+    transition: all .3s;
+
+    &:hover, &:focus {
+      padding-right: 1em;
+    }
+
+    .back-icon {
+      margin-right: .25em;
+    }
+  }
+}
+
+.axis {
+  font-size: .5em;
+  letter-spacing: .25em;
+  text-align: center;
+  text-transform: uppercase;
+
+  &::before, &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 33%;
+    height: 1px;
+    background: #aaa;
+  }
+
+  &::before {
+    left: 0;
+  }
+
+  &::after {
+    right: 0;
+  }
+}
+
+.lightness-axis {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  transform-origin: top right;
+  transform:
+    rotate(-90deg)
+    translateY(200%)
+    rotate(180deg)
+    translateX(100%);
+}
+
+.saturation-axis {
+  position: relative;
+  transform: translateY(100%);
+}
