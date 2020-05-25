@@ -191,7 +191,7 @@ const renderColorInfo = color => {
   const CSSProperties = [`--background: ${name}`, `--color: ${type === 'light' ? 'black' : 'white'}`];
   dom.colorInfo.innerHTML = `
     <div class="color-info-container" style="${CSSProperties.join(';')}">
-      <h1 class="selectable color-info-name">
+      <h1 class="selectable color-info-name" tabindex="0">
         <span class="marquee">${name}</span>
       </h1>
 
