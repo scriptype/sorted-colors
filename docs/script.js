@@ -128,7 +128,8 @@ const createState = (initialState, onChange) => {
 };
 
 const dom = {
-  chartContainer: queryId('chart'),
+  chart: queryId('chart'),
+  chartContainer: queryId('chart-container'),
   hueSlider: queryId('hue-slider'),
   hueValueDisplay: queryId('hue-value'),
   toleranceText: queryId('tolerance-text'),
@@ -172,7 +173,7 @@ const render = state => {
   dom.hueSlider.style.setProperty('--pos', sliderPos);
   dom.hueSlider.value = hue;
   dom.toleranceValueDisplay.innerHTML = colorList.tolerance;
-  dom.chartContainer.innerHTML = html;
+  dom.chart.innerHTML = html;
 };
 
 const formatRGB = rgb => `rgb(${rgb.join(', ')})`;
@@ -241,7 +242,6 @@ const renderColorInfo = color => {
     Array.from(dom.colorInfo.querySelectorAll('.marquee')).forEach(el => {
       const width = el.offsetWidth;
       const widthDiff = containerWidth - width;
-      console.log(widthDiff);
 
       if (widthDiff >= 0) {
         el.classList.remove('marquee');
@@ -254,40 +254,48 @@ const renderColorInfo = color => {
 };
 
 const showColorInfo = e => {
-  if (e.target.classList.contains('deactivating')) {
+  if (dom.chartContainer.querySelector('.deactivating')) {
     return;
   }
 
-  dom.chartContainer.inert = true;
+  dom.chart.inert = true;
   dom.colorInfo.inert = false;
-  dom.chartContainer.classList.add('contain');
+  dom.chart.classList.add('contain');
   e.target.classList.add('active');
   const color = parsedUniqueColors.find(c => c.name === e.target.id);
   renderColorInfo(color);
   dom.colorInfo.classList.add('active');
 };
+/*
+ * Can be triggered by:
+ * - Clicking on close button in colorInfo
+ * - Pressing ESC
+ * - Changing hue while colorInfo is open
+ *   This scenario requires checking if activeColorButton exists.
+ */
+
 
 const hideColorInfo = shouldFocusBack => {
-  dom.chartContainer.inert = false;
+  dom.chart.inert = false;
   dom.colorInfo.inert = true;
   dom.colorInfo.classList.add('deactivating');
   dom.colorInfo.classList.remove('active');
-  const activeColorElement = dom.chartContainer.querySelector('.color-button.active');
+  const activeColorButton = dom.chart.querySelector('.color-button.active');
 
-  if (activeColorElement) {
-    activeColorElement.classList.add('deactivating');
-    activeColorElement.classList.remove('active');
+  if (activeColorButton) {
+    activeColorButton.classList.add('deactivating');
+    activeColorButton.classList.remove('active');
   }
 
   wait(600).then(() => {
     dom.colorInfo.classList.remove('deactivating');
-    dom.chartContainer.classList.remove('contain');
+    dom.chart.classList.remove('contain');
 
-    if (activeColorElement) {
-      activeColorElement.classList.remove('deactivating');
+    if (activeColorButton) {
+      activeColorButton.classList.remove('deactivating');
 
       if (shouldFocusBack) {
-        activeColorElement.focus();
+        activeColorButton.focus();
       }
     }
   });
@@ -313,7 +321,7 @@ dom.hueSlider.addEventListener('input', e => {
   });
   hideColorInfo();
 });
-dom.chartContainer.addEventListener('click', showColorInfo);
+dom.chart.addEventListener('click', showColorInfo);
 
 const keyCodeGetter = () => {
   const KEYS = {
