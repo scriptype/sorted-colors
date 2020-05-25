@@ -1,6 +1,8 @@
 # Sorted CSS Colors
 
-I wanted to create a tool to sort named CSS colors in a way that it shows related colors together. So, next time I can't decide between a few CSS colors, I can just check them here side by side. Here's how it looks:
+I wanted to create a tool to sort named CSS colors in a way that it shows related colors together. So, next time I can't decide between a few CSS colors, I can just check them here side by side.
+
+Here's how it looks:
 
 ![Screenshot](screenshot.png)
 
