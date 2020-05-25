@@ -196,20 +196,20 @@ const renderColorInfo = color => {
       </h1>
 
       ${color.alternativeName ? `
-        <p class="color-info-row color-info-row--alter">
+        <p class="color-info-row color-info-row--alter" tabindex="0">
           or <span class="selectable">${color.alternativeName}</span>
         </p>
       ` : ''}
 
-      <p class="selectable color-info-row color-info-row--hex">
+      <p class="selectable color-info-row color-info-row--hex" tabindex="0">
         ${color.hex}
       </p>
 
-      <p class="selectable color-info-row color-info-row--rgb">
+      <p class="selectable color-info-row color-info-row--rgb" tabindex="0">
         ${formatRGB(color.rgb)}
       </p>
 
-      <p class="selectable color-info-row color-info-row--hsl">
+      <p class="selectable color-info-row color-info-row--hsl" tabindex="0">
         ${formatHSL(color.hsl)}
       </p>
 
@@ -230,6 +230,7 @@ const renderColorInfo = color => {
   closeButton.addEventListener('click', () => hideColorInfo(true));
   Array.from(container.querySelectorAll('.selectable')).forEach(el => {
     el.addEventListener('click', () => select(el));
+    el.addEventListener('focus', () => select(el));
   });
   wait(1000).then(() => {
     const computedStyle = getComputedStyle(container);
@@ -330,4 +331,4 @@ window.addEventListener('keyup', e => {
       }
 
   }
-}); // dom.chartContainer.querySelectorAll('.color-button')[2].click()
+});

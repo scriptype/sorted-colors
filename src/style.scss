@@ -362,6 +362,7 @@ body {
     line-height: 1.3;
     margin-bottom: .33em;
     overflow: hidden;
+    outline: none;
   }
 
   .marquee {
@@ -385,6 +386,7 @@ body {
     font-size: 1.4em;
     font-weight: 100;
     margin-bottom: .33rem;
+    outline: none;
     
     &--alter {
       font-size: 1.8em;
