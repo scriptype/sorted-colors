@@ -12,7 +12,7 @@ Here's how it looks:
 
 - Iconfinder:
   - [Back Icon](https://www.iconfinder.com/icons/326518/arrow_back_icon)
-  - [Github](https://www.iconfinder.com/icons/298822/github_mark_icon)
+  - [Github Icon](https://www.iconfinder.com/icons/298822/github_mark_icon)
 
 ## About the repository
 
