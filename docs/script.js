@@ -41,7 +41,7 @@ const parseDataFromTable = tableID => {
 /*
  * For each color in colorList, check if there's an equivalent color
  * with a different name.
- * Eliminate the unpreferred colors that have equivalents.
+ * Eliminate the non-preferred colors that have equivalents.
  * A color can be thought "preferred", if it has `alternativeName` field in it.
  * e.g. Eliminates fuchsia and aqua in favor of magenta and cyan, respectively.
  */
