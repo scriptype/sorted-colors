@@ -57,6 +57,22 @@ body {
   height: 16px;
 }
 
+.github-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.github-link {
+  position: absolute;
+  top: .5em;
+  right: .5em;
+  opacity: .7;
+
+  &:hover, &:focus {
+    opacity: 1;
+  }
+}
+
 #colorsTable {
   display: none;
 }
