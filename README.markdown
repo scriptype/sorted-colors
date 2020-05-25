@@ -10,7 +10,9 @@ Here's how it looks:
 
 - Table of colors, which I used for parsing color data, is taken from [Eric Meyer's website](https://meyerweb.com/eric/css/colors/) and then modified a bit to serve the purpose better.
 
-- Back Icon is from [Iconfinder](https://www.iconfinder.com/icons/326518/arrow_back_icon)
+- Iconfinder:
+  - [Back Icon](https://www.iconfinder.com/icons/326518/arrow_back_icon)
+  - [Github](https://www.iconfinder.com/icons/326518/arrow_back_icon)
 
 ## About the repository
 
