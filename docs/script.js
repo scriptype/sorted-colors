@@ -6,28 +6,32 @@ const {
 
 const randomFrom = array => array[floor(random() * array.length)];
 
+const getNumbers = n => [...Array(n).keys()];
+
 const wait = duration => new Promise(resolve => {
   setTimeout(resolve, duration);
 });
 
-const query = document.querySelector.bind(document);
-const queryAll = document.querySelectorAll.bind(document);
+const query = (selector, parent = document) => parent.querySelector.call(parent, selector);
+
+const queryAll = (selector, parent = document) => Array.from(parent.querySelectorAll.call(parent, selector));
+
 const queryId = document.getElementById.bind(document);
 
 const parseDataFromTable = tableID => {
   const table = queryId(tableID);
-  const headers = Array.from(queryAll('thead th'));
-  const values = Array.from(queryAll('tbody tr'));
+  const headers = queryAll('thead th', table);
+  const values = queryAll('tbody tr', table);
   const columns = headers.map(header => ({
     id: header.id,
     name: header.innerText
   }));
   const rows = values.map(value => {
-    const cols = Array.from(value.querySelectorAll('td'));
-    return cols.reduce((row, col, colIndex) => {
+    const cells = queryAll('td', value);
+    return cells.reduce((row, cell, colIndex) => {
       const columnId = columns[colIndex].id;
       return { ...row,
-        [columnId]: col.innerText
+        [columnId]: cell.innerText
       };
     }, {
       type: value.getAttribute('class')
@@ -82,7 +86,7 @@ const filterColorsByHue = (colorList, hue, tolerance) => {
 };
 
 const groupColorsByLightness = (colorList, tolerance) => {
-  return [...Array(100 / tolerance + 1).keys()].map(t => colorList.filter(color => {
+  return getNumbers(100 / tolerance + 1).map(t => colorList.filter(color => {
     const difference = 100 - color.hsl[2] - t * tolerance;
     const differenceLimit = tolerance / 2;
 
@@ -90,7 +94,7 @@ const groupColorsByLightness = (colorList, tolerance) => {
       return difference > 0;
     }
 
-    return abs(difference) <= differenceLimit;
+    return abs(difference) < differenceLimit;
   }));
 };
 
@@ -154,9 +158,22 @@ const render = state => {
   });
   const html = colorList.list.map(lightnessGroup => `
     <div class="row">
-      ${lightnessGroup.map(color => `
-        <button type="button" class="color-button" id="${color.name}" style="--background: ${color.name}; --color: ${color.type === 'light' ? '#000' : '#fff'}">${color.name}</button>
-      `).join('')}
+      ${lightnessGroup.map(({
+    name,
+    type
+  }) => {
+    const CSSProperties = [`--background: ${name}`, `--color: ${type === 'light' ? 'black' : 'white'}`];
+    return `
+          <button
+            type="button"
+            class="color-button"
+            id="${name}"
+            style="${CSSProperties.join(';')}"
+          >
+            ${name}
+          </button>
+        `;
+  }).join('')}
     </div>
   `).join('');
   const sliderPos = hue / 360;
@@ -226,10 +243,10 @@ const renderColorInfo = color => {
       </button>
     </div>
   `;
-  const container = dom.colorInfo.querySelector('.color-info-container');
-  const closeButton = container.querySelector('#close-color-info');
+  const container = query('.color-info-container', dom.colorInfo);
+  const closeButton = query('#close-color-info', container);
   closeButton.addEventListener('click', () => hideColorInfo(true));
-  Array.from(container.querySelectorAll('.selectable')).forEach(el => {
+  queryAll('.selectable', container).forEach(el => {
     el.addEventListener('click', () => select(el));
     el.addEventListener('focus', () => select(el));
   });
@@ -239,7 +256,7 @@ const renderColorInfo = color => {
     const paddingLeft = parseFloat(computedStyle.paddingLeft);
     const paddingRight = parseFloat(computedStyle.paddingRight);
     const containerWidth = width - (paddingLeft + paddingRight);
-    Array.from(dom.colorInfo.querySelectorAll('.marquee')).forEach(el => {
+    queryAll('.marquee', dom.colorInfo).forEach(el => {
       const width = el.offsetWidth;
       const widthDiff = containerWidth - width;
 
@@ -254,7 +271,7 @@ const renderColorInfo = color => {
 };
 
 const showColorInfo = e => {
-  if (dom.chartContainer.querySelector('.deactivating')) {
+  if (query('.deactivating', dom.chartContainer)) {
     return;
   }
 
@@ -280,7 +297,7 @@ const hideColorInfo = shouldFocusBack => {
   dom.colorInfo.inert = true;
   dom.colorInfo.classList.add('deactivating');
   dom.colorInfo.classList.remove('active');
-  const activeColorButton = dom.chart.querySelector('.color-button.active');
+  const activeColorButton = query('.color-button.active', dom.chart);
 
   if (activeColorButton) {
     activeColorButton.classList.add('deactivating');
@@ -288,10 +305,10 @@ const hideColorInfo = shouldFocusBack => {
   }
 
   wait(600).then(() => {
-    dom.colorInfo.classList.remove('deactivating');
-    dom.chart.classList.remove('contain');
+    dom.colorInfo.classList.remove('deactivating'); // Last clicked color is still there. e.g. hue didn't change
 
     if (activeColorButton) {
+      dom.chart.classList.remove('contain');
       activeColorButton.classList.remove('deactivating');
 
       if (shouldFocusBack) {
@@ -301,9 +318,9 @@ const hideColorInfo = shouldFocusBack => {
   });
 };
 
-const examplesHues = [13, 25, 36, 47, 105, 150, 178, 210, 240, 297, 336, 350];
+const exampleHues = [13, 25, 36, 47, 105, 150, 178, 210, 240, 297, 336, 350];
 const ui = createState({
-  hue: randomFrom(examplesHues),
+  hue: randomFrom(exampleHues),
   mono: false
 }, render);
 render(ui.state);
