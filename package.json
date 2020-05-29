@@ -25,13 +25,12 @@
     "@babel/plugin-proposal-logical-assignment-operators": "^7.2.0",
     "@babel/plugin-proposal-nullish-coalescing-operator": "^7.4.4",
     "@babel/plugin-proposal-numeric-separator": "^7.2.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.10.1",
     "@babel/plugin-proposal-optional-chaining": "^7.2.0",
     "@babel/plugin-proposal-pipeline-operator": "^7.3.2",
     "@babel/plugin-proposal-throw-expressions": "^7.2.0",
-    "@babel/plugin-syntax-jsx": "^7.2.0",
     "@babel/plugin-transform-modules-commonjs": "^7.4.4",
-    "@babel/plugin-transform-react-display-name": "^7.2.0",
-    "@babel/plugin-transform-react-jsx": "^7.3.0",
+    "@babel/plugin-transform-spread": "^7.10.1",
     "autoprefixer": "^9.8.0",
     "browser-sync": "^2.26.7",
     "del": "^4.1.1",
@@ -43,6 +42,7 @@
     "gulp-rename": "^1.4.0",
     "gulp-sass": "^4.0.2",
     "node-sass": "^4.12.0",
+    "postcss-clamp": "^1.1.0",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.2.3",
     "webpack-dev-server": "^3.2.1"
@@ -142,9 +142,8 @@
         }
       ],
       "@babel/plugin-proposal-throw-expressions",
-      "@babel/plugin-syntax-jsx",
-      "@babel/plugin-transform-react-display-name",
-      "@babel/plugin-transform-react-jsx"
+      "@babel/plugin-transform-spread",
+      "@babel/plugin-proposal-object-rest-spread"
     ]
   },
   "postcss": {
@@ -152,7 +151,8 @@
     "plugins": {
       "autoprefixer": {
         "cascade": false
-      }
+      },
+      "postcss-clamp": {}
     }
   },
   "browserslist": [
