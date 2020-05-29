@@ -4,7 +4,7 @@ I wanted to create a tool to sort the named CSS colors in a way that it shows re
 
 Here's how it looks:
 
-![Screenshot](screenshot.png)
+![Screenshot](kapture.gif)
 
 ## Credits
 
