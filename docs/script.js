@@ -329,11 +329,23 @@ const hideColorInfo = shouldFocusBack => {
 
     if (activeColorButton) {
       dom.chart.classList.remove('contain');
-      activeColorButton.classList.remove('deactivating');
+      /*
+       * The crazy reason why we need to clone an element with one className lacking,
+       * instead of just removing that className from the existing element is:
+       * Some mobile browsers and some (I guess) old versions of Safari fucks up
+       * the animation. They run "deactivate" keyframes upon className removal ¯\_(ツ)_/¯
+       * When we do it this way and do it with some async involved, it works properly.
+       */
 
-      if (shouldFocusBack) {
-        activeColorButton.focus();
-      }
+      const newActiveColorButton = activeColorButton.cloneNode(true);
+      newActiveColorButton.classList.remove('deactivating');
+      requestAnimationFrame(() => {
+        activeColorButton.replaceWith(newActiveColorButton);
+
+        if (shouldFocusBack) {
+          newActiveColorButton.focus();
+        }
+      });
     }
   });
 };
