@@ -23,7 +23,7 @@ const orderedTasks =
   // Get all of the processors as an array
   Object.values(tasks)
     // Sort by the order value
-    .sort((a, b) => (a.order < b.order ? -1 : 1))
+    .sort((a, b) => a.order - b.order)
     // Turn into processor tasks
     .map(makeTask)
     // Flatten into a single array

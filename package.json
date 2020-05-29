@@ -15,18 +15,6 @@
     "distDir": "docs/"
   },
   "devDependencies": {
-    "browser-sync": "^2.26.7",
-    "del": "^4.1.1",
-    "glob": "^7.1.4",
-    "gulp": "^4.0.2",
-    "gulp-rename": "^1.4.0",
-    "webpack": "^4.29.6",
-    "webpack-cli": "^3.2.3",
-    "webpack-dev-server": "^3.2.1",
-    "gulp-inject-partials": "^1.0.5",
-    "gulp-sass": "^4.0.2",
-    "node-sass": "^4.12.0",
-    "gulp-babel": "^8.0.0",
     "@babel/core": "^7.4.5",
     "@babel/plugin-proposal-class-properties": "^7.4.4",
     "@babel/plugin-proposal-decorators": "^7.4.4",
@@ -35,16 +23,29 @@
     "@babel/plugin-proposal-function-sent": "^7.2.0",
     "@babel/plugin-proposal-json-strings": "^7.2.0",
     "@babel/plugin-proposal-logical-assignment-operators": "^7.2.0",
-    "@babel/plugin-transform-modules-commonjs": "^7.4.4",
     "@babel/plugin-proposal-nullish-coalescing-operator": "^7.4.4",
     "@babel/plugin-proposal-numeric-separator": "^7.2.0",
     "@babel/plugin-proposal-optional-chaining": "^7.2.0",
     "@babel/plugin-proposal-pipeline-operator": "^7.3.2",
     "@babel/plugin-proposal-throw-expressions": "^7.2.0",
     "@babel/plugin-syntax-jsx": "^7.2.0",
+    "@babel/plugin-transform-modules-commonjs": "^7.4.4",
     "@babel/plugin-transform-react-display-name": "^7.2.0",
     "@babel/plugin-transform-react-jsx": "^7.3.0",
-    "gulp-autoprefixer": "^6.1.0"
+    "autoprefixer": "^9.8.0",
+    "browser-sync": "^2.26.7",
+    "del": "^4.1.1",
+    "glob": "^7.1.4",
+    "gulp": "^4.0.2",
+    "gulp-babel": "^8.0.0",
+    "gulp-inject-partials": "^1.0.5",
+    "gulp-postcss": "^8.0.0",
+    "gulp-rename": "^1.4.0",
+    "gulp-sass": "^4.0.2",
+    "node-sass": "^4.12.0",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.2.3",
+    "webpack-dev-server": "^3.2.1"
   },
   "tasks": {
     "partials": {
@@ -74,6 +75,7 @@
       ]
     },
     "sass": {
+      "order": 999,
       "src": [
         "**/*.sass",
         "**/*.scss"
@@ -100,18 +102,12 @@
       ]
     },
     "autoprefixer": {
-      "order": 999,
       "src": [
         "**/*.css"
       ],
       "pipe": [
         {
-          "require": "gulp-autoprefixer",
-          "args": [
-            {
-              "cascade": false
-            }
-          ]
+          "require": "gulp-postcss"
         }
       ]
     }
@@ -150,6 +146,14 @@
       "@babel/plugin-transform-react-display-name",
       "@babel/plugin-transform-react-jsx"
     ]
+  },
+  "postcss": {
+    "map": false,
+    "plugins": {
+      "autoprefixer": {
+        "cascade": false
+      }
+    }
   },
   "browserslist": [
     "last 5 version"
