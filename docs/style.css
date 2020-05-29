@@ -147,6 +147,7 @@ body {
   background: none;
   border: none;
   color: inherit;
+  margin: 0;
   outline: none;
   width: 15px;
   height: 15px;
@@ -228,6 +229,7 @@ body {
       background: none;
       border: none;
       color: inherit;
+      margin: 0;
       -webkit-box-flex: 1;
       -ms-flex: 1;
       flex: 1;
@@ -385,6 +387,7 @@ body {
     background: none;
     border: none;
     color: inherit;
+    margin: 0;
     position: absolute;
     bottom: 1em;
     left: 50%;
