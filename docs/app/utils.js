@@ -31,14 +31,16 @@ window.modules.Utils = (() => {
   const queryId = document.getElementById.bind(document);
 
   const createState = (initialState, onChange) => {
+    let state = initialState;
+
+    const setState = newState => {
+      Object.assign(state, newState);
+      onChange(state);
+    };
+
     return {
-      state: initialState,
-
-      setState(newState) {
-        this.state = Object.assign({}, this.state, newState);
-        onChange(this.state);
-      }
-
+      state,
+      setState
     };
   };
 
