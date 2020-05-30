@@ -1,0 +1,21 @@
+:root {
+  --show-info-duration: .3s;
+  --content-width: clamp(400px, 80vmin, 800px);
+  --font-size: clamp(14px, 3vmin, 20px);
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font: normal var(--font-size)/1.4 helvetica, sans-serif;
+}
+
+.container {
+  position: relative;
+  padding: 2vmin;
+  top: -2vmin;
+  left: -2vmin;
+}

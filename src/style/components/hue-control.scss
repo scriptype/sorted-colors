@@ -1,0 +1,27 @@
+.hue-control {
+  display: flex;
+  flex-direction: column;
+  width: var(--content-width);
+  margin-bottom: 1.5vmin;
+  font-size: .8em;
+
+  &-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    min-height: 1.1em;
+    margin-bottom: .75vmin;
+  }
+}
+
+.hue-value {
+  display: inline-block;
+  min-width: 4vmin;
+  text-align: center;
+}
+
+.tolerance-text {
+  font-size: .8em;
+  color: #333;
+}

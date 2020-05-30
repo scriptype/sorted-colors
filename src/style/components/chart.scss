@@ -1,0 +1,86 @@
+@import "../mixins.scss";
+
+.chart-container {
+  position: relative;
+  width: var(--content-width);
+  height: var(--content-width);
+}
+
+.chart {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  @supports (grid-auto-flow: row) {
+    display: grid;
+    grid-auto-flow: row;
+  }
+
+  &.contain {
+    overflow: hidden;
+  }
+
+  .row {
+    flex: 1;
+    display: flex;
+
+    @supports (grid-auto-flow: column) {
+      display: grid;
+      grid-auto-flow: column;
+    }
+
+    .color-button {
+      @include button-reset;
+
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: .6em;
+      text-transform: uppercase;
+      letter-spacing: .125em;
+      background: var(--background);
+      color: var(--color);
+      user-select: none;
+      cursor: pointer;
+      transition: transform .2s;
+
+      &:hover, &:focus {
+        outline: none;
+        transform: scale(1.04);
+        box-shadow: 3px 3px 10px rgba(#000, .125);
+      }
+
+      &:active {
+        transform: scale(1.02);
+        box-shadow: 1px 1px 5px rgba(#000, .125);
+      }
+
+      &.active {
+        transition: transform .6s;
+      }
+
+      &.active,
+      &.deactivating {
+        transform: scale(16);
+        color: transparent;
+      }
+
+      &.deactivating {
+        animation: deactivate forwards calc(2 * var(--show-info-duration));
+      }
+
+      @keyframes deactivate {
+        from, 70% {
+          color: transparent;
+        }
+        to {
+          color: var(--color);
+          transform: scale(1);
+        }
+      }
+    }
+  }
+}

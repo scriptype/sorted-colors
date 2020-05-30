@@ -1,0 +1,35 @@
+@mixin slider-thumb {
+  appearance: none;
+  display: block;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: linear-gradient(
+    120deg,
+    #444 30%,
+    #111 100%
+  );
+  box-shadow:
+    0 0 0 2px white,
+    0 0 2px 3px #444;
+  transition: all .3s;
+}
+
+@mixin non-mono-slider-thumb-focus {
+  background: linear-gradient(
+    120deg,
+    hsl( calc(var(--pos) * 360), 90%, 50% ) 30%,
+    hsl( calc(var(--pos) * 360), 100%, 40% ) 100%
+  );
+  box-shadow:
+    0 0 0 3px white,
+    0 0 2px 4px hsl( calc(var(--pos) * 360), 100%, 50% );
+}
+
+@mixin button-reset {
+  appearance: none;
+  background: none;
+  border: none;
+  color: inherit;
+  margin: 0;
+}

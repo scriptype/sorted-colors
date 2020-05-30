@@ -1,0 +1,57 @@
+.hue-slider {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  outline: none;
+  position: relative;
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  height: 8px;
+  margin-left: 2vmin;
+  border-radius: 5px;
+  -webkit-transition: all .3s;
+  -o-transition: all .3s;
+  transition: all .3s;
+  background: -webkit-gradient(linear, left top, right top, from(#f07575), color-stop(8.3%, #f0b375), color-stop(16.6%, #f0f075), color-stop(25%, #b3f075), color-stop(33.3%, #75f075), color-stop(41.6%, #75f0b3), color-stop(50%, #75f0f0), color-stop(58.3%, #75b3f0), color-stop(66.6%, #7575f0), color-stop(75%, #b375f0), color-stop(83.3%, #f075f0), color-stop(91.6%, #f075b3), to(#f07575));
+  background: -o-linear-gradient(left, #f07575 0%, #f0b375 8.3%, #f0f075 16.6%, #b3f075 25%, #75f075 33.3%, #75f0b3 41.6%, #75f0f0 50%, #75b3f0 58.3%, #7575f0 66.6%, #b375f0 75%, #f075f0 83.3%, #f075b3 91.6%, #f07575 100%);
+  background: linear-gradient(to right, #f07575 0%, #f0b375 8.3%, #f0f075 16.6%, #b3f075 25%, #75f075 33.3%, #75f0b3 41.6%, #75f0f0 50%, #75b3f0 58.3%, #7575f0 66.6%, #b375f0 75%, #f075f0 83.3%, #f075b3 91.6%, #f07575 100%); }
+  .hue-slider.mono {
+    background: -webkit-gradient(linear, left top, left bottom, from(#444), to(#111));
+    background: -o-linear-gradient(top, #444 0%, #111 100%);
+    background: linear-gradient(to bottom, #444 0%, #111 100%); }
+  .hue-slider:not(.mono):focus {
+    height: 10px;
+    background: -webkit-gradient(linear, left top, right top, from(red), color-stop(8.3%, #ff8000), color-stop(16.6%, yellow), color-stop(25%, #80ff00), color-stop(33.3%, lime), color-stop(41.6%, #00ff80), color-stop(50%, cyan), color-stop(58.3%, #0080ff), color-stop(66.6%, blue), color-stop(75%, #8000ff), color-stop(83.3%, magenta), color-stop(91.6%, #ff0080), to(red));
+    background: -o-linear-gradient(left, red 0%, #ff8000 8.3%, yellow 16.6%, #80ff00 25%, lime 33.3%, #00ff80 41.6%, cyan 50%, #0080ff 58.3%, blue 66.6%, #8000ff 75%, magenta 83.3%, #ff0080 91.6%, red 100%);
+    background: linear-gradient(to right, red 0%, #ff8000 8.3%, yellow 16.6%, #80ff00 25%, lime 33.3%, #00ff80 41.6%, cyan 50%, #0080ff 58.3%, blue 66.6%, #8000ff 75%, magenta 83.3%, #ff0080 91.6%, red 100%); }
+  .hue-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    display: block;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: linear-gradient(120deg, #444 30%, #111 100%);
+    -webkit-box-shadow: 0 0 0 2px white, 0 0 2px 3px #444;
+    box-shadow: 0 0 0 2px white, 0 0 2px 3px #444;
+    -webkit-transition: all .3s;
+    transition: all .3s; }
+  .hue-slider::-moz-range-thumb {
+    -moz-appearance: none;
+    appearance: none;
+    display: block;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: linear-gradient(120deg, #444 30%, #111 100%);
+    box-shadow: 0 0 0 2px white, 0 0 2px 3px #444;
+    -moz-transition: all .3s;
+    transition: all .3s; }
+  .hue-slider:not(.mono):focus::-webkit-slider-thumb {
+    background: linear-gradient(120deg, hsl(calc(var(--pos) * 360), 90%, 50%) 30%, hsl(calc(var(--pos) * 360), 100%, 40%) 100%);
+    -webkit-box-shadow: 0 0 0 3px white, 0 0 2px 4px hsl(calc(var(--pos) * 360), 100%, 50%);
+    box-shadow: 0 0 0 3px white, 0 0 2px 4px hsl(calc(var(--pos) * 360), 100%, 50%); }
+  .hue-slider:not(.mono):focus::-moz-range-thumb {
+    background: linear-gradient(120deg, hsl(calc(var(--pos) * 360), 90%, 50%) 30%, hsl(calc(var(--pos) * 360), 100%, 40%) 100%);
+    box-shadow: 0 0 0 3px white, 0 0 2px 4px hsl(calc(var(--pos) * 360), 100%, 50%); }

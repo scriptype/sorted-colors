@@ -1,0 +1,10 @@
+.github-link {
+  position: absolute;
+  top: .5em;
+  right: .5em;
+  opacity: .7;
+
+  &:hover, &:focus {
+    opacity: 1;
+  }
+}

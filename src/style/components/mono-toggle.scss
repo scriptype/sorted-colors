@@ -1,0 +1,79 @@
+@import "../mixins.scss";
+
+.mono-toggle {
+  @include button-reset;
+  outline: none;
+
+  width: 15px;
+  height: 15px;
+  margin-left: 2vmin;
+  border-radius: 50%;
+  transition: background-position .2s;
+  cursor: pointer;
+  background-size: 200%;
+  background-image: linear-gradient(
+    to right,
+    white 24%,
+    #777 28%,
+    #777 70%,
+    white 74%
+  );
+  box-shadow:
+    0 0 0 1.5px white,
+    0 0 0 3px #777;
+
+  &:hover {
+    background-image: linear-gradient(
+      to right,
+      white 24%,
+      #333 28%,
+      #333 70%,
+      white 74%
+    );
+    box-shadow:
+      0 0 0 1.5px white,
+      0 0 0 3px #333;
+  }
+
+  &:active {
+    background-image: linear-gradient(
+      to right,
+      #f5f5f5 24%,
+      #888 28%,
+      #888 70%,
+      #f5f5f5 74%
+    );
+    box-shadow:
+      0 0 0 1.5px white,
+      0 0 0 3px #888;
+  }
+
+  &:checked,
+  &:checked:active {
+    background-position: 89% 0;
+    background-image: linear-gradient(
+      to right,
+      white 24%,
+      black 28%,
+      black 70%,
+      white 74%
+    );
+    box-shadow:
+      0 0 0 1.5px white,
+      0 0 0 3px black;
+  }
+
+  &:focus {
+    box-shadow:
+      0 0 0 1.5px white,
+      0 0 0 3px #333,
+      0 0 2.25px 6px rgba(black, .125);
+  }
+
+  &:checked:focus {
+    box-shadow:
+      0 0 0 1.5px white,
+      0 0 0 3px black,
+      0 0 2.25px 6px rgba(black, .25);
+  }
+}

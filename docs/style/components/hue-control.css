@@ -1,0 +1,33 @@
+.hue-control {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: var(--content-width);
+  margin-bottom: 1.5vmin;
+  font-size: .8em; }
+  .hue-control-row {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    width: 100%;
+    min-height: 1.1em;
+    margin-bottom: .75vmin; }
+
+.hue-value {
+  display: inline-block;
+  min-width: 4vmin;
+  text-align: center; }
+
+.tolerance-text {
+  font-size: .8em;
+  color: #333; }

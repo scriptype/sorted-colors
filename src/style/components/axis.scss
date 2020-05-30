@@ -1,0 +1,42 @@
+.axis {
+  font-size: .5em;
+  letter-spacing: .25em;
+  text-align: center;
+  text-transform: uppercase;
+
+  &::before, &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 33%;
+    height: 1px;
+    background: #aaa;
+  }
+
+  &::before {
+    left: 0;
+  }
+
+  &::after {
+    right: 0;
+  }
+}
+
+.lightness-axis {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  transform-origin: top right;
+  transform:
+    rotate(-90deg)
+    translateY(200%)
+    rotate(180deg)
+    translateX(100%);
+}
+
+.saturation-axis {
+  position: relative;
+  transform: translateY(100%);
+}
