@@ -28,26 +28,20 @@ window.modules.Controller = (({
   }
 
   const onToggleMono = isChecked => {
-    ui.setState({
+    setState({
       mono: isChecked,
-      prevHue: ui.state.hue,
-      hue: isChecked ? 0 : ui.state.prevHue
+      prevHue: state.hue,
+      hue: isChecked ? 0 : state.prevHue
     })
     hideColorInfo()
   }
 
   const onChangeHue = hue => {
-    ui.setState({
+    setState({
       hue
     })
     hideColorInfo()
   }
-
-  GlobalEvents.onKeyUp('escape', () => {
-    if (ColorInfo.isActive()) {
-      hideColorInfo(true)
-    }
-  })
 
   const render = ({ hue, mono }) => {
     const colorList = groupColors({
@@ -72,13 +66,19 @@ window.modules.Controller = (({
     })
   }
 
+  GlobalEvents.onKeyUp('escape', () => {
+    if (ColorInfo.isActive()) {
+      hideColorInfo(true)
+    }
+  })
+
   const colorsData = parseDataFromTable( queryId('colorsTable') )
   const uniqueColors = removeAlternativeColors(colorsData.rows)
   const parsedUniqueColors = uniqueColors.map(parseColorStrings)
 
   const exampleHues = [13, 25, 36, 47, 105, 150, 178, 210, 240, 297, 336, 350]
 
-  const ui = createState({
+  const { state, setState } = createState({
     hue: randomFrom(exampleHues),
     mono: false
   }, render)
@@ -98,7 +98,7 @@ window.modules.Controller = (({
 
   return {
     init() {
-      render(ui.state)
+      render(state)
     }
   }
 
