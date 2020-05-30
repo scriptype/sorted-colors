@@ -15,13 +15,20 @@ function makeTask(opts) {
   const { key, pipe = [] } = opts;
 
   function runTask() {
+    const sources = (prefix) => opts.src.map(path => {
+      if (path[0] === '!') {
+        return `!${prefix}${path.slice(1)}`
+      }
+      return `${prefix}${path}`
+    })
+
     // Gather the files from the entry directory (dir)
-    src(opts.src.map(file => config.srcDir + file), {
-      sourcemaps: config.sourcemaps
+    src(sources(config.srcDir), {
+      sourcemaps: config.sourcemaps,
     }).pipe(dest(config.distDir)); // Copy to the Dist dir
 
-    const filesToModify = src(opts.src.map(file => config.distDir + file), {
-      sourcemaps: config.sourcemaps
+    const filesToModify = src(sources(config.distDir), {
+      sourcemaps: config.sourcemaps,
     }); // Make sure we include any additional files from the dist dir
 
     const pipes = pipe.map(processor => {

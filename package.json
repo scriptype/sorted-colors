@@ -12,7 +12,12 @@
   },
   "config": {
     "srcDir": "src/",
-    "distDir": "docs/"
+    "distDir": "docs/",
+    "copyIgnore": [
+      "!**/_*.*",
+      "!**/*.spec.*",
+      "!**/*.test.*"
+    ]
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
@@ -48,7 +53,7 @@
   },
   "tasks": {
     "partials": {
-      "order": 999,
+      "order": 10,
       "src": [
         "**/*.template.html"
       ],
@@ -74,7 +79,7 @@
       ]
     },
     "sass": {
-      "order": 999,
+      "order": 9,
       "src": [
         "**/*.sass",
         "**/*.scss"
@@ -89,7 +94,9 @@
     "babel": {
       "src": [
         "**/*.js",
-        "**/*.babel"
+        "**/*.babel",
+        "!**/*.spec.js",
+        "!**/*.test.js"
       ],
       "pipe": [
         {

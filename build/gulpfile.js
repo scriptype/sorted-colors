@@ -41,7 +41,7 @@ function clean(done) {
  * Copy src files to the dist dir for processing. The tasks will cleanup unneeded files.
  */
 function copyToDist() {
-  return src([config.srcDir + '**/*.*', '!**/_*.*']).pipe(dest(config.distDir));
+  return src([config.srcDir + '**/*.*', ...config.copyIgnore]).pipe(dest(config.distDir));
 }
 
 /*
