@@ -340,10 +340,12 @@ const hideColorInfo = shouldFocusBack => {
       const newActiveColorButton = activeColorButton.cloneNode(true);
       newActiveColorButton.classList.remove('deactivating');
       requestAnimationFrame(() => {
-        activeColorButton.replaceWith(newActiveColorButton);
+        if (activeColorButton) {
+          activeColorButton.replaceWith(newActiveColorButton);
 
-        if (shouldFocusBack) {
-          newActiveColorButton.focus();
+          if (shouldFocusBack) {
+            newActiveColorButton.focus();
+          }
         }
       });
     }
