@@ -1,10 +1,10 @@
-window.modules.colorInfo = (({
-  utils: {
+window.modules.ColorInfo = (({
+  Utils: {
     wait,
     query,
     queryAll
   },
-  colors: {
+  Colors: {
     formatRGB,
     formatHSL
   }

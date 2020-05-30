@@ -1,16 +1,16 @@
 window.modules.App = (({
-  utils: {
+  Utils: {
     queryId
-  }
-}) => {
-  const {
+  },
+  Table: {
     parseDataFromTable
-  } = modules.table;
-  const {
+  },
+  Colors: {
     removeAlternativeColors,
     parseColorStrings
-  } = modules.colors;
-  const initChart = modules.chart;
+  },
+  Chart: initChart
+}) => {
   const colorsData = parseDataFromTable(queryId('colorsTable'));
   const uniqueColors = removeAlternativeColors(colorsData.rows);
   const parsedUniqueColors = uniqueColors.map(parseColorStrings);

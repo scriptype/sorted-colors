@@ -1,5 +1,5 @@
-window.modules.colors = (({
-  utils: { getNumbers }
+window.modules.Colors = (({
+  Utils: { getNumbers }
 }) => {
 
   const { abs } = Math

@@ -1,5 +1,5 @@
-window.modules.table = (({
-  utils: { queryAll }
+window.modules.Table = (({
+  Utils: { queryAll }
 }) => {
 
   const parseDataFromTable = table => {

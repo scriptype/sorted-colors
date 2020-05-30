@@ -1,6 +1,6 @@
-window.modules.colorInfo = (({
-  utils: { wait, query, queryAll },
-  colors: { formatRGB, formatHSL }
+window.modules.ColorInfo = (({
+  Utils: { wait, query, queryAll },
+  Colors: { formatRGB, formatHSL }
 }) => {
 
   const props = {

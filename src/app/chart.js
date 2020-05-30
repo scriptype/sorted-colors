@@ -1,5 +1,5 @@
-window.modules.chart = (({
-  utils: {
+window.modules.Chart = (({
+  Utils: {
     randomFrom,
     wait,
     query,
@@ -8,8 +8,8 @@ window.modules.chart = (({
     createState,
     getKeyCode
   },
-  colors: { groupColors },
-  colorInfo
+  Colors: { groupColors },
+  ColorInfo
 }) => {
 
   return ({ colors }) => {
@@ -36,7 +36,7 @@ window.modules.chart = (({
         mono
       })
 
-      colorInfo.setup({
+      ColorInfo.setup({
         el: queryId('color-info'),
         onClose: hideColorInfo.bind(null, true)
       })
@@ -82,7 +82,7 @@ window.modules.chart = (({
 
 
     const showColorInfo = e => {
-      if (query('.deactivating', dom.chart) || colorInfo.isDeactivating()) {
+      if (query('.deactivating', dom.chart) || ColorInfo.isDeactivating()) {
         return
       }
 
@@ -91,7 +91,7 @@ window.modules.chart = (({
       e.target.classList.add('active')
 
       const color = colors.find(c => c.name === e.target.id)
-      colorInfo.show(color)
+      ColorInfo.show(color)
     }
 
     /*
@@ -103,7 +103,7 @@ window.modules.chart = (({
      */
     const hideColorInfo = shouldFocusBack => {
       dom.chart.inert = false
-      colorInfo.hide()
+      ColorInfo.hide()
       const activeColorButton = query('.color-button.active', dom.chart)
       if (activeColorButton) {
         activeColorButton.classList.add('deactivating')
@@ -164,7 +164,7 @@ window.modules.chart = (({
     dom.chart.addEventListener('click', showColorInfo)
 
     window.addEventListener('keyup', e => {
-      if (getKeyCode(e) === 'escape' && colorInfo.isActive()) {
+      if (getKeyCode(e) === 'escape' && ColorInfo.isActive()) {
         hideColorInfo(true)
       }
     })

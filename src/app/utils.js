@@ -1,4 +1,4 @@
-window.modules.utils = (() => {
+window.modules.Utils = (() => {
   const { floor, random } = Math
 
   const randomFrom = array => array[floor(random() * array.length)]
@@ -43,4 +43,4 @@ window.modules.utils = (() => {
     createState,
     getKeyCode
   }
-})()
+})(window.modules)
