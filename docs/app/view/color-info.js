@@ -2,6 +2,7 @@ window.modules.ColorInfo = (({
   Utils: {
     wait,
     query,
+    queryId,
     queryAll
   },
   Colors: {
@@ -9,16 +10,16 @@ window.modules.ColorInfo = (({
     formatHSL
   }
 }) => {
+  const dom = {
+    colorInfo: queryId('color-info')
+  };
   const props = {
-    el: null,
     onClose: () => {}
   };
 
   const setup = ({
-    el,
     onClose
   }) => {
-    props.el = el;
     props.onClose = onClose;
   };
 
@@ -31,10 +32,10 @@ window.modules.ColorInfo = (({
       hsl,
       hex
     } = color;
-    props.el.inert = false;
-    props.el.classList.add('active');
+    dom.colorInfo.inert = false;
+    dom.colorInfo.classList.add('active');
     const CSSProperties = [`--background: ${name}`, `--color: ${type === 'light' ? 'black' : 'white'}`];
-    props.el.innerHTML = `
+    dom.colorInfo.innerHTML = `
       <div class="color-info-container" style="${CSSProperties.join(';')}">
         <h1 class="selectable color-info-name" tabindex="0">
           <span class="marquee">${name}</span>
@@ -70,7 +71,7 @@ window.modules.ColorInfo = (({
         </button>
       </div>
     `;
-    const container = query('.color-info-container', props.el);
+    const container = query('.color-info-container', dom.colorInfo);
     const closeButton = query('#close-color-info', container);
     closeButton.addEventListener('click', props.onClose);
     queryAll('.selectable', container).forEach(selectable => {
@@ -83,7 +84,7 @@ window.modules.ColorInfo = (({
       const paddingLeft = parseFloat(computedStyle.paddingLeft);
       const paddingRight = parseFloat(computedStyle.paddingRight);
       const containerWidth = width - (paddingLeft + paddingRight);
-      queryAll('.marquee', props.el).forEach(item => {
+      queryAll('.marquee', dom.colorInfo).forEach(item => {
         const width = item.offsetWidth;
         const widthDiff = containerWidth - width;
 
@@ -98,17 +99,17 @@ window.modules.ColorInfo = (({
   };
 
   const hide = () => {
-    props.el.inert = true;
-    props.el.classList.add('deactivating');
-    props.el.classList.remove('active');
+    dom.colorInfo.inert = true;
+    dom.colorInfo.classList.add('deactivating');
+    dom.colorInfo.classList.remove('active');
     wait(600).then(() => {
-      props.el.classList.remove('deactivating');
+      dom.colorInfo.classList.remove('deactivating');
     });
   };
 
-  const isActive = () => props.el.classList.contains('active');
+  const isActive = () => dom.colorInfo.classList.contains('active');
 
-  const isDeactivating = () => props.el.classList.contains('deactivating');
+  const isDeactivating = () => dom.colorInfo.classList.contains('deactivating');
 
   return {
     setup,
