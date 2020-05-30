@@ -78,7 +78,6 @@ window.modules.Controller = (({
 
   const exampleHues = [13, 25, 36, 47, 105, 150, 178, 210, 240, 297, 336, 350]
 
-
   const ui = createState({
     hue: randomFrom(exampleHues),
     mono: false
