@@ -1,12 +1,13 @@
 const util = require('util')
 const fs = require('fs')
 const path = require('path')
-
 const { JSDOM } = require('jsdom')
 
-const readFile = util.promisify(fs.readFile)
+const { config } = require('../package.json')
 
-const htmlPath = path.resolve(__dirname, '..', 'docs', 'index.html')
+const htmlPath = path.resolve(__dirname, '..', config.distDir, 'index.html')
+
+const readFile = util.promisify(fs.readFile)
 
 const loadDOM = readFile(htmlPath)
   .then(html => new JSDOM(html, {
