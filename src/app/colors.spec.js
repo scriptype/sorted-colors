@@ -1,6 +1,53 @@
 const test = require('tape')
 const loadDOM = require('../../test-helpers/load-dom')
 
+test('Colors.removeAlternativeColors', async t => {
+  const dom = await loadDOM
+  const { Colors } = dom.window.modules
+
+  const colorList = [
+    {
+      name: 'some color',
+      hex: '#dadada',
+      rgb: 'rgb(1,2,3)',
+      hsl: 'hsl(100,50%,25%)'
+    },
+    {
+      name: 'preferred color',
+      alternativeName: 'unpreferred color',
+      hex: '#bebebe',
+      rgb: 'rgb(4,5,6)',
+      hsl: 'hsl(120,60%,50%)'
+    },
+    {
+      name: 'unpreferred color',
+      hex: '#bebebe',
+      rgb: 'rgb(4,5,6)',
+      hsl: 'hsl(120,60%,50%)'
+    }
+  ]
+
+  const expected = colorList.filter(c => c.name !== 'unpreferred color')
+
+  t.same(
+    Colors.removeAlternativeColors(colorList),
+    expected,
+    'Removes unpreferred equivalent and preserves others'
+  )
+
+  const reversedColorList = [...colorList].reverse()
+
+  const reversedExpected = reversedColorList.filter(
+    c => c.name !== 'unpreferred color'
+  )
+
+  t.same(
+    Colors.removeAlternativeColors(reversedColorList),
+    reversedExpected,
+    "The order of colors doesn't matter"
+  )
+})
+
 test('Colors.parseColorStrings', async t => {
   const dom = await loadDOM
   const { Colors } = dom.window.modules
