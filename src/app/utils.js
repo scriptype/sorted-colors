@@ -45,6 +45,7 @@ window.modules.Utils = (() => {
     queryAll,
     queryId,
     createState,
+    keyCodes,
     getKeyCode
   }
 })(window.modules)
