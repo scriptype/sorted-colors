@@ -9,7 +9,7 @@
     "serve": "gulp serve -f ./build/gulpfile.js --cwd ./ --continue",
     "task": "gulp -f ./build/gulpfile.js --cwd ./ --continue",
     "tasks": "gulp --tasks-simple -f ./build/gulpfile.js --cwd ./ --continue",
-    "test": "tape src/**/*.spec.js"
+    "test": "tape src/**/*.spec.js | tnyan"
   },
   "config": {
     "srcDir": "src/",
