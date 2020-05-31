@@ -51,7 +51,7 @@ window.modules.Colors = (({
         }
         return abs(difference) < differenceLimit
       })
-    )
+    ).filter(group => !!group.length)
   }
 
   const groupColors = ({ colorList, hue, tolerance, mono }) => {
@@ -62,10 +62,8 @@ window.modules.Colors = (({
 
     const lightnessGroups = groupColorsByLightness(colorsFilteredByHue.list, tolerance.min)
 
-    const finalColorsList = lightnessGroups.filter(group => !!group.length)
-
     return {
-      list: finalColorsList,
+      list: lightnessGroups,
       tolerance: colorsFilteredByHue.tolerance
     }
   }
