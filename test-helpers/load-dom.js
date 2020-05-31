@@ -16,7 +16,7 @@ const loadDOM = readFile(htmlPath)
   }))
   .then(dom => {
     return new Promise(resolve => {
-      const limit = 10
+      const limit = 100
       let pollCount = 0
       const interval = setInterval(() => {
         console.log('polling dom:', pollCount++, `/ ${limit}`)
@@ -27,7 +27,7 @@ const loadDOM = readFile(htmlPath)
         if (pollCount >= limit) {
           clearInterval(interval)
         }
-      }, 1000)
+      }, 100)
     })
   })
 
