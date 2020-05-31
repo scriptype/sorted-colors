@@ -48,13 +48,29 @@ test('Utils.getNumbers', async t => {
   )
 })
 
-/*
-
 test('Utils.wait', async t => {
   const dom = await loadDOM
   const { Utils } = dom.window.modules
-  t.end()
+
+  const duration = 300
+  const timeStart = Date.now()
+  const result = Utils.wait(duration)
+
+  t.true(result.then, 'Returns a Promise')
+
+  await result
+
+  const timeEnd = Date.now()
+  const difference = timeEnd - timeStart
+  const tolerableDelay = 30
+
+  t.true(
+    difference >= duration && difference - duration <= tolerableDelay,
+    'It resolves after (with a tolerable delay) given duration'
+  )
 })
+
+/*
 
 test('Utils.query', async t => {
   const dom = await loadDOM
