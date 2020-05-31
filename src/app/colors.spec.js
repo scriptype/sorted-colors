@@ -63,8 +63,6 @@ test('Colors.parseColorStrings', async t => {
     },
     'Parses rgb and hsl values correctly'
   )
-
-  t.end()
 })
 
 test('Colors.isMonochrome', async t => {
@@ -88,8 +86,6 @@ test('Colors.isMonochrome', async t => {
     Colors.isMonochrome(nonMonochromeColor),
     "It's not monochrome when saturation is not 0"
   )
-
-  t.end()
 })
 
 test('Colors.isNonMonochrome', async t => {
@@ -113,8 +109,6 @@ test('Colors.isNonMonochrome', async t => {
     Colors.isNonMonochrome(monochromeColor),
     "It's monochrome When saturation is 0"
   )
-
-  t.end()
 })
 
 test('Colors.filterColorsByHue', async t => {
@@ -236,8 +230,6 @@ test('Colors.filterColorsByHue', async t => {
     expectedForHue10,
     'Filters correct colors for hue 10'
   )
-
-  t.end()
 })
 
 test('Colors.formatRGB', async t => {
@@ -249,8 +241,6 @@ test('Colors.formatRGB', async t => {
     'rgb(255, 0, 5)',
     'Formats RGB correctly'
   )
-
-  t.end()
 })
 
 test('Colors.formatHSL', async t => {
@@ -262,17 +252,13 @@ test('Colors.formatHSL', async t => {
     'hsl(120, 50%, 90%)',
     'Formats HSL correctly'
   )
-
-  t.end()
 })
 
 /*
 
 test('Colors.groupColorsByLightness', t => {
-  t.end()
 })
 
 test('Colors.groupColors', t => {
-  t.end()
 })
 */
