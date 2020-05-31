@@ -329,6 +329,96 @@ test('Colors.groupColorsByLightness', async t => {
   )
 })
 
+/*
+ * Group colors should:
+ * - Eliminate either colorful colors or monochromes, depending on "mono" option,
+ * - Choose colors whose hue is close enough ("toleratable") to "hue" option,
+ * - Group remaining colors by their lightness,
+ * - Inside groups, sort colors by their saturation.
+ */
+test('Colors.groupColors', async t => {
+  const dom = await loadDOM
+  const { Colors } = dom.window.modules
+
+  const hue = 120
+  const tolerance = {
+    min: 10
+  }
+
+  /*
+   * Colors are arranged by random hue, random saturation and increasing lightness
+   */
+  const colorList = [
+    { hsl: [119, 100, 40] },
+    { hsl: [111, 40, 44] },
+    { hsl: [0, 0, 12] }, // Mono
+    { hsl: [0, 0, 3] }, // Mono
+    { hsl: [0, 0, 9] }, // Mono
+    { hsl: [0, 0, 6] }, // Mono
+    { hsl: [0, 0, 90] }, // Mono
+    { hsl: [124, 80, 48] },
+    { hsl: [120, 50, 52] },
+    { hsl: [130, 3, 80] }, // Should be eliminated
+    { hsl: [129, 70, 56] },
+    { hsl: [0, 0, 0] }, // Mono
+    { hsl: [123, 60, 60] },
+  ]
+
+  const expectedColorful = {
+    list: [
+      [
+        { hsl: [123, 60, 60] },
+        { hsl: [129, 70, 56] }
+      ],
+      [
+        { hsl: [120, 50, 52] },
+        { hsl: [124, 80, 48] }
+      ],
+      [
+        { hsl: [111, 40, 44] },
+        { hsl: [119, 100, 40] }
+      ]
+    ],
+    tolerance: 10
+  }
+
+  const actualColorful = Colors.groupColors({
+    colorList,
+    hue,
+    tolerance,
+    mono: false
+  })
+
+  t.deepLooseEqual(actualColorful, expectedColorful, 'It works correctly for non-mono')
+
+  const expectedMono = {
+    list: [
+      [ // Lightness group around 90
+        { hsl: [0, 0, 90] }
+      ],
+      [ // Lightness group around 10
+        { hsl: [0, 0, 12] },
+        { hsl: [0, 0, 9] },
+        { hsl: [0, 0, 6] }
+      ],
+      [ // Lightness group around 5
+        { hsl: [0, 0, 3] },
+        { hsl: [0, 0, 0] }
+      ]
+    ],
+    tolerance: 121
+  }
+
+  const actualMono = Colors.groupColors({
+    colorList,
+    hue,
+    tolerance,
+    mono: true
+  })
+
+  t.deepLooseEqual(actualMono, expectedMono, 'It works correctly for mono')
+})
+
 test('Colors.formatRGB', async t => {
   const dom = await loadDOM
   const { Colors } = dom.window.modules
@@ -350,9 +440,3 @@ test('Colors.formatHSL', async t => {
     'Formats HSL correctly'
   )
 })
-
-/*
-
-test('Colors.groupColors', t => {
-})
-*/
