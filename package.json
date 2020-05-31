@@ -8,7 +8,8 @@
     "build": "gulp -f ./build/gulpfile.js --cwd ./ --continue",
     "serve": "gulp serve -f ./build/gulpfile.js --cwd ./ --continue",
     "task": "gulp -f ./build/gulpfile.js --cwd ./ --continue",
-    "tasks": "gulp --tasks-simple -f ./build/gulpfile.js --cwd ./ --continue"
+    "tasks": "gulp --tasks-simple -f ./build/gulpfile.js --cwd ./ --continue",
+    "test": "tape src/**/*.spec.js"
   },
   "config": {
     "srcDir": "src/",
@@ -45,8 +46,11 @@
     "gulp-postcss": "^8.0.0",
     "gulp-rename": "^1.4.0",
     "gulp-sass": "^4.0.2",
+    "jsdom": "^16.2.2",
     "node-sass": "^4.12.0",
     "postcss-clamp": "^1.1.0",
+    "tap-nyan": "^1.1.0",
+    "tape": "^5.0.1",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.2.3",
     "webpack-dev-server": "^3.2.1"
