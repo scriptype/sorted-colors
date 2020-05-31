@@ -22,11 +22,6 @@ function makeTask(opts) {
       return `${prefix}${path}`
     })
 
-    // Gather the files from the entry directory (dir)
-    src(sources(config.srcDir), {
-      sourcemaps: config.sourcemaps,
-    }).pipe(dest(config.distDir)); // Copy to the Dist dir
-
     const filesToModify = src(sources(config.distDir), {
       sourcemaps: config.sourcemaps,
     }); // Make sure we include any additional files from the dist dir

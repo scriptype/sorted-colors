@@ -55,9 +55,9 @@
     "webpack-cli": "^3.2.3",
     "webpack-dev-server": "^3.2.1"
   },
-  "tasks": {
-    "partials": {
-      "order": 10,
+  "tasks": [
+    {
+      "key": "partials",
       "src": [
         "**/*.template.html"
       ],
@@ -82,8 +82,21 @@
         "**/*.template.html"
       ]
     },
-    "sass": {
-      "order": 9,
+    {
+      "key": "babel",
+      "src": [
+        "**/*.js",
+        "!**/*.spec.js",
+        "!**/*.test.js"
+      ],
+      "pipe": [
+        {
+          "require": "gulp-babel"
+        }
+      ]
+    },
+    {
+      "key": "sass",
       "src": [
         "**/*.sass",
         "**/*.scss"
@@ -95,23 +108,8 @@
       ],
       "cleanup": true
     },
-    "babel": {
-      "src": [
-        "**/*.js",
-        "**/*.babel",
-        "!**/*.spec.js",
-        "!**/*.test.js"
-      ],
-      "pipe": [
-        {
-          "require": "gulp-babel"
-        }
-      ],
-      "cleanup": [
-        "**/*.babel"
-      ]
-    },
-    "autoprefixer": {
+    {
+      "key": "autoprefixer",
       "src": [
         "**/*.css"
       ],
@@ -121,7 +119,7 @@
         }
       ]
     }
-  },
+  ],
   "babel": {
     "plugins": [
       "@babel/plugin-proposal-class-properties",

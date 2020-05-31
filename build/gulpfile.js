@@ -4,26 +4,16 @@ const del = require('del');
 const { config, tasks } = require('../package.json');
 const { makeTask } = require('./util.js');
 
-/* Make sure each task has its key inserted. */
-Object.keys(tasks).forEach(key => {
-  tasks[key].key = key;
-});
-
 /*
  * Tasks loaded from package.json and converted into runnable task functions */
-const taskFns = Object.keys(tasks).reduce((obj, key) => {
-  obj[key] = makeTask(tasks[key]);
+const taskFns = tasks.reduce((obj, task) => {
+  obj[task.key] = makeTask(task);
   return obj;
 }, {});
 
-/*
- * Array of tasks sorted by their `order` property for running in series.
- */
-const orderedTasks =
+const runnableTasks =
   // Get all of the processors as an array
-  Object.values(tasks)
-    // Sort by the order value
-    .sort((a, b) => a.order - b.order)
+  tasks
     // Turn into processor tasks
     .map(makeTask)
     // Flatten into a single array
@@ -48,7 +38,7 @@ function copyToDist() {
  * $ npm run build
  * The default build task, running these tasks in series.
  */
-const build = series(clean, copyToDist, ...orderedTasks);
+const build = series(clean, copyToDist, ...runnableTasks);
 
 module.exports = {
   default: build,
