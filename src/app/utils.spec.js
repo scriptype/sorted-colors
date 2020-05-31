@@ -35,13 +35,20 @@ test('Utils.randomFrom', async t => {
   t.true(areSamplesDifferent, 'Outputs different results')
 })
 
-/*
-
 test('Utils.getNumbers', async t => {
   const dom = await loadDOM
   const { Utils } = dom.window.modules
-  t.end()
+
+  const count = 5
+
+  t.deepLooseEqual(
+    Utils.getNumbers(count),
+    [0, 1, 2, 3, 4],
+    'It creates an array of numbers starting from 0 until the given number [0, number)'
+  )
 })
+
+/*
 
 test('Utils.wait', async t => {
   const dom = await loadDOM
