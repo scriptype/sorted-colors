@@ -232,6 +232,103 @@ test('Colors.filterColorsByHue', async t => {
   )
 })
 
+test('Colors.groupColorsByLightness', async t => {
+  const dom = await loadDOM
+  const { Colors } = dom.window.modules
+
+  const tolerance = 5
+
+  /*
+   * Hues and saturations are pretty much random, and only thing that makes
+   * a color belong to a "group" is its lightness.
+   *
+   * And the colors are not sorted by any rule.
+   *
+   * So we're implicitly asserting that the algorithm should:
+   * - Not depend on the order of the colors,
+   * - Not depend on hue or saturation of the colors,
+   * - Depend only on the lightness of the color.
+   * */
+  const colorList = [
+    { hsl: [30, 10, 50] }, // Group B
+    { hsl: [60, 30, 10] }, // Group D
+    { hsl: [90, 50, 15] }, // Group C
+    { hsl: [120, 70, 80] }, // Group A
+
+    { hsl: [3, 300, 12] }, // Group D
+    { hsl: [100, 60, 16] }, // Group C
+
+    { hsl: [40, 20, 51] }, // Group B
+    { hsl: [190, 230, 8] }, // Group D
+
+    { hsl: [240, 30, 9] }, // Group D
+
+    { hsl: [65, 160, 11] }, // Group D
+    { hsl: [130, 50, 78] } // Group A
+  ]
+
+  // Order of colors in groups may be different, and it's okay.
+  const expected = [
+    [ // A
+      { hsl: [130, 50, 78] },
+      { hsl: [120, 70, 80] }
+    ],
+
+    [ // B
+      { hsl: [30, 10, 50] },
+      { hsl: [40, 20, 51] }
+    ],
+
+    [ // C
+      { hsl: [90, 50, 15] },
+      { hsl: [100, 60, 16] },
+    ],
+
+    [ // D
+      { hsl: [190, 230, 8] },
+      { hsl: [240, 30, 9] },
+      { hsl: [60, 30, 10] },
+      { hsl: [65, 160, 11] },
+      { hsl: [3, 300, 12] },
+    ]
+  ]
+
+  const actual = Colors.groupColorsByLightness(colorList, tolerance)
+
+  const expectedAssertionCount = expected.reduce((total, group) => total + group.length, 0)
+  let actualAssertionCount = 0
+
+  expected.forEach((group, groupIndex) => {
+    group.forEach(color => {
+      const stringifiedGroup = actual[groupIndex].map(color => JSON.stringify(color))
+      const stringifiedColor = JSON.stringify(color)
+      t.true( stringifiedGroup.includes(stringifiedColor) )
+      actualAssertionCount++
+    })
+  })
+
+  t.is(
+    actualAssertionCount,
+    expectedAssertionCount,
+    'Number of assertions was correct'
+  )
+
+  const colorListWithValueInMiddle = [
+    { hsl: [60, 30, 10] }, // Group A
+    { hsl: [90, 50, 15] }, // Group B
+    { hsl: [190, 230, 12.5] }, // It should be only in ONE of them.
+  ]
+
+  const actual2 = Colors.groupColorsByLightness(colorListWithValueInMiddle, tolerance)
+
+  const totalColorCount = actual2.reduce((total, group) => total + group.length, 0)
+  t.is(
+    totalColorCount,
+    colorListWithValueInMiddle.length,
+    'If a value that can go to either one of two neighbouring groups, it goes to only one of them. No duplication.'
+  )
+})
+
 test('Colors.formatRGB', async t => {
   const dom = await loadDOM
   const { Colors } = dom.window.modules
@@ -255,9 +352,6 @@ test('Colors.formatHSL', async t => {
 })
 
 /*
-
-test('Colors.groupColorsByLightness', t => {
-})
 
 test('Colors.groupColors', t => {
 })
