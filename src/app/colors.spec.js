@@ -240,6 +240,32 @@ test('Colors.filterColorsByHue', async t => {
   t.end()
 })
 
+test('Colors.formatRGB', async t => {
+  const dom = await loadDOM
+  const { Colors } = dom.window.modules
+
+  t.same(
+    Colors.formatRGB([255, 0, 5]),
+    'rgb(255, 0, 5)',
+    'Formats RGB correctly'
+  )
+
+  t.end()
+})
+
+test('Colors.formatHSL', async t => {
+  const dom = await loadDOM
+  const { Colors } = dom.window.modules
+
+  t.same(
+    Colors.formatHSL([120, 50, 90]),
+    'hsl(120, 50%, 90%)',
+    'Formats HSL correctly'
+  )
+
+  t.end()
+})
+
 /*
 
 test('Colors.groupColorsByLightness', t => {
@@ -247,14 +273,6 @@ test('Colors.groupColorsByLightness', t => {
 })
 
 test('Colors.groupColors', t => {
-  t.end()
-})
-
-test('Colors.formatRGB', t => {
-  t.end()
-})
-
-test('Colors.formatHSL', t => {
   t.end()
 })
 */
