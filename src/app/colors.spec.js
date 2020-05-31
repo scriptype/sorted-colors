@@ -117,11 +117,130 @@ test('Colors.isNonMonochrome', async t => {
   t.end()
 })
 
-/*
+test('Colors.filterColorsByHue', async t => {
+  const dom = await loadDOM
+  const { Colors } = dom.window.modules
 
-test('Colors.filterColorsByHue', t => {
+  const tolerance = 5
+
+  /*
+   * This is prepared to assert that
+   * - Saturation and lightness is irrelevant,
+   * - Order of colors is irrelevant,
+   * - any ONLY hue and tolerance should play role
+   */
+  const colorList = [
+    { hsl: [60, 70, 60] }, // Group A, hue 60 will get them (tol: 5)
+    { hsl: [50, 80, 50] }, // Group B, hue 50 will get them (tol: 5)
+    { hsl: [200, 90, 40] }, // Group C, hue 200 will get them (tol: 20)
+
+    { hsl: [58, 60, 65] },
+    { hsl: [48, 60, 55] },
+    { hsl: [190, 80, 45] },
+
+    { hsl: [56, 30, 70] },
+    { hsl: [46, 40, 30] },
+    { hsl: [181, 90, 85] },
+
+    { hsl: [62, 35, 85] },
+    { hsl: [52, 90, 90] },
+    { hsl: [210, 10, 25] },
+  ]
+
+  const expectedForHue50 = {
+    list: [
+      { hsl: [50, 80, 50] },
+      { hsl: [48, 60, 55] },
+      { hsl: [46, 40, 30] },
+      { hsl: [52, 90, 90] }
+    ],
+    tolerance: 5
+  }
+
+  const expectedForHue60 = {
+    list: [
+      { hsl: [60, 70, 60] },
+      { hsl: [58, 60, 65] },
+      { hsl: [56, 30, 70] },
+      { hsl: [62, 35, 85] }
+    ],
+    tolerance: 5
+  }
+
+  // To catch them all, tolerance needs to be 20
+  const expectedForHue200 = {
+    list: [
+      { hsl: [200, 90, 40] }
+    ],
+    tolerance: 5
+  }
+
+  const expectedForHue200Tolerance20 = {
+    list: [
+      { hsl: [200, 90, 40] },
+      { hsl: [190, 80, 45] },
+      { hsl: [181, 90, 85] },
+      { hsl: [210, 10, 25] }
+    ],
+    tolerance: 20
+  }
+
+  // Starts with tolerance 5, recurses until tolerance 91, then finds one color
+  const expectedForHue300 = {
+    list: [
+      { hsl: [210, 10, 25] }
+    ],
+    tolerance: 91
+  }
+
+  // Starts with tolerance 5, recurses until tolerance 37, then finds one color
+  const expectedForHue10 = {
+    list: [
+      { hsl: [46, 40, 30] }
+    ],
+    tolerance: 37
+  }
+
+  t.deepLooseEqual(
+    Colors.filterColorsByHue(colorList, 50, tolerance),
+    expectedForHue50,
+    'Filters correct colors for hue 50'
+  )
+
+  t.deepLooseEqual(
+    Colors.filterColorsByHue(colorList, 60, tolerance),
+    expectedForHue60,
+    'Filters correct colors for hue 60'
+  )
+
+  t.deepLooseEqual(
+    Colors.filterColorsByHue(colorList, 200, tolerance),
+    expectedForHue200,
+    'Filters correct colors for hue 200'
+  )
+
+  t.deepLooseEqual(
+    Colors.filterColorsByHue(colorList, 200, 20),
+    expectedForHue200Tolerance20,
+    'Filters correct colors for hue 200, tolerance 20'
+  )
+
+  t.deepLooseEqual(
+    Colors.filterColorsByHue(colorList, 300, tolerance),
+    expectedForHue300,
+    'Filters correct colors for hue 300'
+  )
+
+  t.deepLooseEqual(
+    Colors.filterColorsByHue(colorList, 10, tolerance),
+    expectedForHue10,
+    'Filters correct colors for hue 10'
+  )
+
   t.end()
 })
+
+/*
 
 test('Colors.groupColorsByLightness', t => {
   t.end()
