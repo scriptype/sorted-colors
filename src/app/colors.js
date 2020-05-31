@@ -57,9 +57,7 @@ window.modules.Colors = (({
   const groupColors = ({ colorList, hue, tolerance, mono }) => {
     const baseColors = colorList.filter(mono ? isMonochrome : isNonMonochrome)
     const sortedColors = [...baseColors].sort((a, b) => a.hsl[1] - b.hsl[1])
-
     const colorsFilteredByHue = filterColorsByHue(sortedColors, hue, tolerance.min)
-
     const lightnessGroups = groupColorsByLightness(colorsFilteredByHue.list, tolerance.min)
 
     return {
