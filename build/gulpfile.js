@@ -70,7 +70,7 @@ module.exports = {
       server: config.distDir
     });
 
-    watch([config.srcDir + '**/*.*'], series(build, refresh));
+    watch([config.srcDir + '**/*.*', ...config.copyIgnore], series(build, refresh));
   }),
 
   ...taskFns
