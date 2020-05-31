@@ -27,16 +27,16 @@ window.modules.Controller = (({
     ColorInfo.hide()
   }
 
-  const onToggleMono = isChecked => {
+  const toggleMono = isOn => {
     setState({
-      mono: isChecked,
+      mono: isOn,
       prevHue: state.hue,
-      hue: isChecked ? 0 : state.prevHue
+      hue: isOn ? 0 : state.prevHue
     })
     hideColorInfo()
   }
 
-  const onChangeHue = hue => {
+  const setHue = hue => {
     setState({
       hue
     })
@@ -84,8 +84,8 @@ window.modules.Controller = (({
   }, render)
 
   HueControl.setup({
-    onToggleMono,
-    onChangeHue
+    onToggleMono: toggleMono,
+    onChangeHue: setHue
   })
 
   Chart.setup({
