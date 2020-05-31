@@ -14,14 +14,14 @@ window.modules.Table = (({
     const values = queryAll('tbody tr', table);
     const columns = headers.map(header => ({
       id: header.id,
-      name: header.innerText
+      name: header.textContent
     }));
     const rows = values.map(value => {
       const cells = queryAll('td', value);
       return cells.reduce((row, cell, colIndex) => {
         const columnId = columns[colIndex].id;
         return _objectSpread(_objectSpread({}, row), {}, {
-          [columnId]: cell.innerText
+          [columnId]: cell.textContent
         });
       }, {
         type: value.getAttribute('class')

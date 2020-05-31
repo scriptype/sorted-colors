@@ -8,7 +8,7 @@ window.modules.Table = (({
 
     const columns = headers.map(header => ({
       id: header.id,
-      name: header.innerText
+      name: header.textContent
     }))
 
     const rows = values.map(value => {
@@ -17,7 +17,7 @@ window.modules.Table = (({
         const columnId = columns[colIndex].id
         return {
           ...row,
-          [columnId]: cell.innerText
+          [columnId]: cell.textContent
         }
       }, {
         type: value.getAttribute('class')
