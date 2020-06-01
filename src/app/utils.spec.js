@@ -153,12 +153,25 @@ test('Utils.createState', async t => {
   )
 })
 
-/*
-
 test('Utils.getKeyCode', async t => {
   const dom = await loadDOM
   const { Utils } = dom.window.modules
-  t.end()
-})
 
-*/
+  t.is(
+    Utils.getKeyCode({ keyCode: 27 }),
+    Utils.keyCodes[27],
+    'It correctly says it was escape key, when only "keyCode" exists'
+  )
+
+  t.is(
+    Utils.getKeyCode({ which: 27 }),
+    Utils.keyCodes[27],
+    'It correctly says it was escape key, when only "which" exists'
+  )
+
+  t.isNot(
+    Utils.getKeyCode({ keyCode: 36 }),
+    Utils.keyCodes[27],
+    'Not every key is escape'
+  )
+})
