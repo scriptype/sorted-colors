@@ -125,13 +125,35 @@ test('Utils.queryId', async t => {
   )
 })
 
-/*
-
 test('Utils.createState', async t => {
   const dom = await loadDOM
   const { Utils } = dom.window.modules
-  t.end()
+
+  let changedKey, changedValue
+  const sampleState = Utils.createState({
+    test: 123,
+    lorem: 'ipsum'
+  }, newState => {
+    t.pass('It triggers onChange callback')
+    t.true(
+      newState[changedKey] === changedValue,
+      'Provides a correct newState object to onChange callback'
+    )
+  })
+
+  changedKey = 'test'
+  changedValue = 456
+  sampleState.setState({
+    [changedKey]: changedValue
+  })
+
+  t.true(
+    sampleState.state[changedKey] === changedValue,
+    'state object is updated correctly'
+  )
 })
+
+/*
 
 test('Utils.getKeyCode', async t => {
   const dom = await loadDOM
