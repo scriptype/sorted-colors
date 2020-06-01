@@ -92,13 +92,29 @@ test('Utils.query', async t => {
   )
 })
 
-/*
-
 test('Utils.queryAll', async t => {
   const dom = await loadDOM
   const { Utils } = dom.window.modules
-  t.end()
+
+  const result = Utils.queryAll('*')
+
+  t.true(result.length > 1, 'It returns all matching elements')
+
+  t.true(Array.isArray(result), 'It returns an array')
+
+  const container = dom.window.document.createElement('div')
+  const element = dom.window.document.createElement('p')
+  element.id = 'test-element'
+  container.appendChild(element)
+
+  t.deepLooseEqual(
+    Utils.queryAll('#test-element', container),
+    [element],
+    'It queries parent dom element if provided'
+  )
 })
+
+/*
 
 test('Utils.queryId', async t => {
   const dom = await loadDOM
