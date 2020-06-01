@@ -114,13 +114,18 @@ test('Utils.queryAll', async t => {
   )
 })
 
-/*
-
 test('Utils.queryId', async t => {
   const dom = await loadDOM
   const { Utils } = dom.window.modules
-  t.end()
+
+  t.is(
+    Utils.queryId('chart'),
+    dom.window.document.getElementById('chart'),
+    'It correctly queries an element by its id'
+  )
 })
+
+/*
 
 test('Utils.createState', async t => {
   const dom = await loadDOM
