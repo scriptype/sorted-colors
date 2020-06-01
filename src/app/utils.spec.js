@@ -70,13 +70,29 @@ test('Utils.wait', async t => {
   )
 })
 
-/*
-
 test('Utils.query', async t => {
   const dom = await loadDOM
   const { Utils } = dom.window.modules
-  t.end()
+
+  t.same(
+    Utils.query('body'),
+    dom.window.document.body,
+    'Retrieves an element'
+  )
+
+  const container = dom.window.document.createElement('div')
+  const element = dom.window.document.createElement('p')
+  element.id = 'test-element'
+  container.appendChild(element)
+
+  t.same(
+    Utils.query('#test-element', container),
+    element,
+    'If provided, it queries within a parent dom element'
+  )
 })
+
+/*
 
 test('Utils.queryAll', async t => {
   const dom = await loadDOM
