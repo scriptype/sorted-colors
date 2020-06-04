@@ -21,7 +21,7 @@ window.modules.views.HueControl = (({
     })
   }
 
-  const render = ({ colorList, hue, mono }) => {
+  const render = ({ tolerance, hue, mono }) => {
     const sliderPos = hue / 360
 
     dom.hueSlider.classList.toggle('mono', !!mono)
@@ -35,7 +35,7 @@ window.modules.views.HueControl = (({
 
     dom.hueSlider.style.setProperty('--pos', sliderPos)
     dom.hueSlider.value = hue
-    dom.toleranceValueDisplay.innerHTML = colorList.tolerance
+    dom.toleranceValueDisplay.innerHTML = tolerance
   }
 
   return {

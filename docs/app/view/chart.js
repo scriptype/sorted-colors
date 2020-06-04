@@ -22,7 +22,7 @@ window.modules.views.Chart = (({
     hue,
     mono
   }) => {
-    dom.chart.innerHTML = colorList.list.map(lightnessGroup => `
+    dom.chart.innerHTML = colorList.map(lightnessGroup => `
       <div class="row">
         ${lightnessGroup.map(({
       name,

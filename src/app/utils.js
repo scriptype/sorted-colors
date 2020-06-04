@@ -17,20 +17,6 @@ window.modules.Utils = (() => {
 
   const queryId = document.getElementById.bind(document)
 
-  const createState = (initialState, onChange) => {
-    const state = initialState
-
-    const setState = newState => {
-      Object.assign(state, newState)
-      onChange(state)
-    }
-
-    return {
-      state,
-      setState
-    }
-  }
-
   const keyCodes = {
     27: 'escape'
   }
@@ -44,7 +30,6 @@ window.modules.Utils = (() => {
     query,
     queryAll,
     queryId,
-    createState,
     keyCodes,
     getKeyCode
   }

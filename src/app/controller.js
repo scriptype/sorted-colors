@@ -1,14 +1,26 @@
 window.modules.Controller = (({
-  Utils: {
-    randomFrom,
-    queryId,
-    createState
-  },
   GlobalEvents,
+  Model,
   Table: { parseDataFromTable },
   Colors: { groupColors, removeAlternativeColors, parseColorStrings },
   views: { HueControl, Chart, ColorInfo }
 }) => {
+  const init = () => {
+    const { colorList, tolerance, hue, mono } = Model.data
+
+    Chart.render({
+      colorList,
+      hue,
+      mono
+    })
+
+    HueControl.render({
+      tolerance,
+      hue,
+      mono
+    })
+  }
+
   const showColorInfo = colorId => {
     if (Chart.isDeactivating() || ColorInfo.isDeactivating()) {
       return
@@ -16,7 +28,7 @@ window.modules.Controller = (({
 
     Chart.activateColor(colorId)
 
-    const color = parsedUniqueColors.find(c => c.name === colorId)
+    const color = Model.data.colorsData.find(c => c.name === colorId)
     ColorInfo.show(color)
   }
 
@@ -26,42 +38,20 @@ window.modules.Controller = (({
   }
 
   const toggleMono = isOn => {
-    setState({
+    const { hue, prevHue } = Model.data
+    Model.update({
       mono: isOn,
-      prevHue: state.hue,
-      hue: isOn ? 0 : state.prevHue
+      prevHue: hue,
+      hue: isOn ? 0 : prevHue
     })
     hideColorInfo()
   }
 
   const setHue = hue => {
-    setState({
+    Model.update({
       hue
     })
     hideColorInfo()
-  }
-
-  const render = ({ hue, mono }) => {
-    const colorList = groupColors({
-      colorList: parsedUniqueColors,
-      tolerance: {
-        min: 5
-      },
-      hue,
-      mono
-    })
-
-    Chart.render({
-      colorList,
-      hue,
-      mono
-    })
-
-    HueControl.render({
-      colorList,
-      hue,
-      mono
-    })
   }
 
   GlobalEvents.onKeyUp('escape', () => {
@@ -69,17 +59,6 @@ window.modules.Controller = (({
       hideColorInfo(true)
     }
   })
-
-  const colorsData = parseDataFromTable(queryId('colorsTable'))
-  const uniqueColors = removeAlternativeColors(colorsData.rows)
-  const parsedUniqueColors = uniqueColors.map(parseColorStrings)
-
-  const exampleHues = [13, 25, 36, 47, 105, 150, 178, 210, 240, 297, 336, 350]
-
-  const { state, setState } = createState({
-    hue: randomFrom(exampleHues),
-    mono: false
-  }, render)
 
   HueControl.setup({
     onToggleMono: toggleMono,
@@ -94,9 +73,12 @@ window.modules.Controller = (({
     onClose: hideColorInfo.bind(null, true)
   })
 
+  Model.setup({
+    colorsTableId: 'colorsTable',
+    onChange: init
+  })
+
   return {
-    init() {
-      render(state)
-    }
+    init
   }
 })(window.modules)
