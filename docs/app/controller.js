@@ -13,9 +13,11 @@ window.modules.Controller = (({
     removeAlternativeColors,
     parseColorStrings
   },
-  HueControl,
-  Chart,
-  ColorInfo
+  views: {
+    HueControl,
+    Chart,
+    ColorInfo
+  }
 }) => {
   const showColorInfo = colorId => {
     if (Chart.isDeactivating() || ColorInfo.isDeactivating()) {

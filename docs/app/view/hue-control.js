@@ -1,4 +1,4 @@
-window.modules.HueControl = (({
+window.modules.views.HueControl = (({
   Utils: {
     queryId
   }

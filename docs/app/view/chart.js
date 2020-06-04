@@ -1,4 +1,4 @@
-window.modules.Chart = (({
+window.modules.views.Chart = (({
   Utils: {
     wait,
     query,

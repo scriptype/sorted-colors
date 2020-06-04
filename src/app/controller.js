@@ -7,9 +7,7 @@ window.modules.Controller = (({
   GlobalEvents,
   Table: { parseDataFromTable },
   Colors: { groupColors, removeAlternativeColors, parseColorStrings },
-  HueControl,
-  Chart,
-  ColorInfo
+  views: { HueControl, Chart, ColorInfo }
 }) => {
   const showColorInfo = colorId => {
     if (Chart.isDeactivating() || ColorInfo.isDeactivating()) {

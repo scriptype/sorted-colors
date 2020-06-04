@@ -1,4 +1,4 @@
-window.modules.ColorInfo = (({
+window.modules.views.ColorInfo = (({
   Utils: { wait, query, queryId, queryAll },
   Colors: { formatRGB, formatHSL }
 }) => {
