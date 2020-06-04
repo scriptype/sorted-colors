@@ -40,7 +40,7 @@ window.modules.Model = (({
     state.onChange = callback
   }
 
-  const update = ({ hue, mono } = {}) => {
+  const getNewState = ({ hue, mono, ...rest }) => {
     const newHue = typeof hue !== 'undefined' ? hue : state.hue
     const newMono = typeof mono !== 'undefined' ? mono : state.mono
 
@@ -51,13 +51,18 @@ window.modules.Model = (({
       tolerance: Settings.tolerance
     })
 
-    Object.assign(state, {
+    return {
       hue: newHue,
       mono: newMono,
       colorList,
-      tolerance
-    })
+      tolerance,
+      ...rest
+    }
+  }
 
+  const update = ({ hue, mono, ...rest } = {}) => {
+    const newState = getNewState({ hue, mono, ...rest })
+    Object.assign(state, newState)
     state.onChange(state)
   }
 
