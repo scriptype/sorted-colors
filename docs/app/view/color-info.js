@@ -41,22 +41,22 @@ window.modules.ColorInfo = (({
           <span class="marquee">${name}</span>
         </h1>
 
-        ${color.alternativeName ? `
+        ${alternativeName ? `
           <p class="color-info-row color-info-row--alter" tabindex="0">
-            or <span class="selectable">${color.alternativeName}</span>
+            or <span class="selectable">${alternativeName}</span>
           </p>
         ` : ''}
 
         <p class="selectable color-info-row color-info-row--hex" tabindex="0">
-          ${color.hex}
+          ${hex}
         </p>
 
         <p class="selectable color-info-row color-info-row--rgb" tabindex="0">
-          ${formatRGB(color.rgb)}
+          ${formatRGB(rgb)}
         </p>
 
         <p class="selectable color-info-row color-info-row--hsl" tabindex="0">
-          ${formatHSL(color.hsl)}
+          ${formatHSL(hsl)}
         </p>
 
         <button

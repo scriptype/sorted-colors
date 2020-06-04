@@ -1,5 +1,5 @@
 window.modules.Chart = (({
-  Utils: { wait, query, queryId },
+  Utils: { wait, query, queryId }
 }) => {
   const dom = {
     chart: queryId('chart')
@@ -14,7 +14,7 @@ window.modules.Chart = (({
   const render = ({ colorList, hue, mono }) => {
     dom.chart.innerHTML = colorList.list.map(lightnessGroup => `
       <div class="row">
-        ${lightnessGroup.map(({ name, type}) => {
+        ${lightnessGroup.map(({ name, type }) => {
           const CSSProperties = [
             `--background: ${name}`,
             `--color: ${type === 'light' ? 'black' : 'white'}`
@@ -93,5 +93,4 @@ window.modules.Chart = (({
     deactivateColor,
     isDeactivating
   }
-
 })(window.modules)

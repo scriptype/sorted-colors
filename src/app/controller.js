@@ -72,7 +72,7 @@ window.modules.Controller = (({
     }
   })
 
-  const colorsData = parseDataFromTable( queryId('colorsTable') )
+  const colorsData = parseDataFromTable(queryId('colorsTable'))
   const uniqueColors = removeAlternativeColors(colorsData.rows)
   const parsedUniqueColors = uniqueColors.map(parseColorStrings)
 
@@ -101,5 +101,4 @@ window.modules.Controller = (({
       render(state)
     }
   }
-
 })(window.modules)

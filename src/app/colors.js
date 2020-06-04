@@ -1,7 +1,6 @@
 window.modules.Colors = (({
   Utils: { getNumbers }
 }) => {
-
   const { abs } = Math
 
   /*
@@ -31,7 +30,7 @@ window.modules.Colors = (({
   const isNonMonochrome = color => !isMonochrome(color)
 
   const filterColorsByHue = (colorList, hue, tolerance) => {
-    const colors = colorList.filter(color =>  abs(hue - color.hsl[0]) < tolerance)
+    const colors = colorList.filter(color => abs(hue - color.hsl[0]) < tolerance)
     if (colors.length) {
       return {
         list: colors,
@@ -81,5 +80,4 @@ window.modules.Colors = (({
     formatRGB,
     formatHSL
   }
-
 })(window.modules)

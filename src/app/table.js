@@ -1,7 +1,6 @@
 window.modules.Table = (({
   Utils: { queryAll }
 }) => {
-
   const parseDataFromTable = table => {
     const headers = queryAll('thead th', table)
     const values = queryAll('tbody tr', table)
@@ -33,5 +32,4 @@ window.modules.Table = (({
   return {
     parseDataFromTable
   }
-
 })(window.modules)

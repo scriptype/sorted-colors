@@ -138,7 +138,7 @@ test('Colors.filterColorsByHue', async t => {
 
     { hsl: [62, 35, 85] },
     { hsl: [52, 90, 90] },
-    { hsl: [210, 10, 25] },
+    { hsl: [210, 10, 25] }
   ]
 
   const expectedForHue50 = {
@@ -281,7 +281,7 @@ test('Colors.groupColorsByLightness', async t => {
 
     [ // C
       { hsl: [90, 50, 15] },
-      { hsl: [100, 60, 16] },
+      { hsl: [100, 60, 16] }
     ],
 
     [ // D
@@ -289,7 +289,7 @@ test('Colors.groupColorsByLightness', async t => {
       { hsl: [240, 30, 9] },
       { hsl: [60, 30, 10] },
       { hsl: [65, 160, 11] },
-      { hsl: [3, 300, 12] },
+      { hsl: [3, 300, 12] }
     ]
   ]
 
@@ -302,7 +302,7 @@ test('Colors.groupColorsByLightness', async t => {
     group.forEach(color => {
       const stringifiedGroup = actual[groupIndex].map(color => JSON.stringify(color))
       const stringifiedColor = JSON.stringify(color)
-      t.true( stringifiedGroup.includes(stringifiedColor) )
+      t.true(stringifiedGroup.includes(stringifiedColor))
       actualAssertionCount++
     })
   })
@@ -316,7 +316,7 @@ test('Colors.groupColorsByLightness', async t => {
   const colorListWithValueInMiddle = [
     { hsl: [60, 30, 10] }, // Group A
     { hsl: [90, 50, 15] }, // Group B
-    { hsl: [190, 230, 12.5] }, // It should be only in ONE of them.
+    { hsl: [190, 230, 12.5] } // It should be only in ONE of them.
   ]
 
   const actual2 = Colors.groupColorsByLightness(colorListWithValueInMiddle, tolerance)
@@ -361,7 +361,7 @@ test('Colors.groupColors', async t => {
     { hsl: [130, 3, 80] }, // Should be eliminated
     { hsl: [129, 70, 56] },
     { hsl: [0, 0, 0] }, // Mono
-    { hsl: [123, 60, 60] },
+    { hsl: [123, 60, 60] }
   ]
 
   const expectedColorful = {

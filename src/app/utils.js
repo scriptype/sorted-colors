@@ -10,24 +10,24 @@ window.modules.Utils = (() => {
   })
 
   const query = (selector, parent = document) =>
-    parent.querySelector.call(parent, selector)
+    parent.querySelector(selector)
 
   const queryAll = (selector, parent = document) =>
-    Array.from(parent.querySelectorAll.call(parent, selector))
+    Array.from(parent.querySelectorAll(selector))
 
   const queryId = document.getElementById.bind(document)
 
   const createState = (initialState, onChange) => {
-    let state = initialState
+    const state = initialState
 
-    const setState = newState  => {
+    const setState = newState => {
       Object.assign(state, newState)
       onChange(state)
     }
 
     return {
       state,
-      setState,
+      setState
     }
   }
 

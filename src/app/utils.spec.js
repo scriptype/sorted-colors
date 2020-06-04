@@ -129,7 +129,9 @@ test('Utils.createState', async t => {
   const dom = await loadDOM
   const { Utils } = dom.window.modules
 
-  let changedKey, changedValue
+  const changedKey = 'test'
+  const changedValue = 456
+
   const sampleState = Utils.createState({
     test: 123,
     lorem: 'ipsum'
@@ -141,8 +143,6 @@ test('Utils.createState', async t => {
     )
   })
 
-  changedKey = 'test'
-  changedValue = 456
   sampleState.setState({
     [changedKey]: changedValue
   })

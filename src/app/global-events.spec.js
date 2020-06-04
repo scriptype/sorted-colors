@@ -19,4 +19,4 @@ test('GlobalEvents.onKeyUp', async t => {
   dom.window.document.dispatchEvent(event)
 
   t.plan(1)
-});
+})
