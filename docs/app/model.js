@@ -47,11 +47,11 @@ window.modules.Model = (({
     update();
   };
 
-  const setColorsData = tableId => {
+  const setColorsData = (tableId, storage = state) => {
     const colorsData = parseDataFromTable(queryId(tableId));
     const uniqueColors = removeAlternativeColors(colorsData.rows);
     const parsedUniqueColors = uniqueColors.map(parseColorStrings);
-    state.colorsData = parsedUniqueColors;
+    storage.colorsData = parsedUniqueColors;
   };
 
   const setCallback = callback => {
@@ -102,6 +102,8 @@ window.modules.Model = (({
   return {
     setup,
     update,
-    data: state
+    data: state,
+    // Exports for tests
+    setColorsData
   };
 })(window.modules);
