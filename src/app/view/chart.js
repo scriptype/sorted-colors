@@ -1,5 +1,6 @@
 window.modules.views.Chart = (({
-  Utils: { wait, query, queryId }
+  Utils: { wait, query, queryId },
+  Model
 }) => {
   const dom = {
     chart: queryId('chart')
@@ -9,9 +10,13 @@ window.modules.views.Chart = (({
     dom.chart.addEventListener('click', e => {
       onClickColor(e.target.id)
     })
+
+    Model.listen('change', render)
   }
 
-  const render = ({ colorList, hue, mono }) => {
+  const render = () => {
+    const { colorList } = Model.data
+
     dom.chart.innerHTML = colorList.map(lightnessGroup => `
       <div class="row">
         ${lightnessGroup.map(({ name, type }) => {

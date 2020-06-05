@@ -5,7 +5,8 @@ window.modules.Model = (({
     createState
   },
   Table: { parseDataFromTable },
-  Colors: { groupColors, removeAlternativeColors, parseColorStrings }
+  Colors: { groupColors, removeAlternativeColors, parseColorStrings },
+  EventEmitter: createEventEmitter
 }) => {
   const Settings = {
     exampleHues: [13, 25, 36, 47, 105, 150, 178, 210, 240, 297, 336, 350],
@@ -14,18 +15,18 @@ window.modules.Model = (({
     }
   }
 
+  const eventEmitter = createEventEmitter()
+
   const state = {
     hue: randomFrom(Settings.exampleHues),
     mono: false,
     colorList: [],
     tolerance: Settings.tolerance.min,
-    colorsData: [],
-    onChange: () => {}
+    colorsData: []
   }
 
   const setup = ({ colorsTableId, onChange }) => {
     setColorsData(colorsTableId)
-    setCallback(onChange)
     update()
   }
 
@@ -34,10 +35,6 @@ window.modules.Model = (({
     const uniqueColors = removeAlternativeColors(colorsData.rows)
     const parsedUniqueColors = uniqueColors.map(parseColorStrings)
     storage.colorsData = parsedUniqueColors
-  }
-
-  const setCallback = (callback) => {
-    state.onChange = callback
   }
 
   const getNewState = ({ hue, mono, ...rest }) => {
@@ -63,10 +60,11 @@ window.modules.Model = (({
   const update = ({ hue, mono, ...rest } = {}) => {
     const newState = getNewState({ hue, mono, ...rest })
     Object.assign(state, newState)
-    state.onChange(state)
+    eventEmitter.emit('change')
   }
 
   return {
+    ...eventEmitter,
     setup,
     update,
     data: state,

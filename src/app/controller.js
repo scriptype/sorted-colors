@@ -6,19 +6,8 @@ window.modules.Controller = (({
   views: { HueControl, Chart, ColorInfo }
 }) => {
   const init = () => {
-    const { colorList, tolerance, hue, mono } = Model.data
-
-    Chart.render({
-      colorList,
-      hue,
-      mono
-    })
-
-    HueControl.render({
-      tolerance,
-      hue,
-      mono
-    })
+    Chart.render()
+    HueControl.render()
   }
 
   const showColorInfo = colorId => {
@@ -74,8 +63,7 @@ window.modules.Controller = (({
   })
 
   Model.setup({
-    colorsTableId: 'colorsTable',
-    onChange: init
+    colorsTableId: 'colorsTable'
   })
 
   return {

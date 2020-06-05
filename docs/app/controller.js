@@ -16,22 +16,8 @@ window.modules.Controller = (({
   }
 }) => {
   const init = () => {
-    const {
-      colorList,
-      tolerance,
-      hue,
-      mono
-    } = Model.data;
-    Chart.render({
-      colorList,
-      hue,
-      mono
-    });
-    HueControl.render({
-      tolerance,
-      hue,
-      mono
-    });
+    Chart.render();
+    HueControl.render();
   };
 
   const showColorInfo = colorId => {
@@ -85,8 +71,7 @@ window.modules.Controller = (({
     onClose: hideColorInfo.bind(null, true)
   });
   Model.setup({
-    colorsTableId: 'colorsTable',
-    onChange: init
+    colorsTableId: 'colorsTable'
   });
   return {
     init
