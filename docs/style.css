@@ -177,25 +177,21 @@ body {
     -webkit-appearance: none;
     appearance: none;
     display: block;
-    width: 15px;
-    height: 15px;
+    width: 18px;
+    height: 18px;
     border-radius: 50%;
     background: linear-gradient(120deg, #444 30%, #111 100%);
     -webkit-box-shadow: 0 0 0 2px white, 0 0 2px 3px #444;
-    box-shadow: 0 0 0 2px white, 0 0 2px 3px #444;
-    -webkit-transition: all .3s;
-    transition: all .3s; }
+    box-shadow: 0 0 0 2px white, 0 0 2px 3px #444; }
   .hue-slider::-moz-range-thumb {
     -moz-appearance: none;
     appearance: none;
     display: block;
-    width: 15px;
-    height: 15px;
+    width: 18px;
+    height: 18px;
     border-radius: 50%;
     background: linear-gradient(120deg, #444 30%, #111 100%);
-    box-shadow: 0 0 0 2px white, 0 0 2px 3px #444;
-    -moz-transition: all .3s;
-    transition: all .3s; }
+    box-shadow: 0 0 0 2px white, 0 0 2px 3px #444; }
   .hue-slider:not(.mono):focus::-webkit-slider-thumb {
     background: linear-gradient(120deg, hsl(calc(var(--pos) * 360), 90%, 50%) 30%, hsl(calc(var(--pos) * 360), 100%, 40%) 100%);
     -webkit-box-shadow: 0 0 0 3px white, 0 0 2px 4px hsl(calc(var(--pos) * 360), 100%, 50%);
