@@ -8,7 +8,7 @@ const Selectors = {
   closeColorInfo: '#close-color-info'
 }
 
-const isVisible = async (dom, element) => {
+const isVisible = (dom, element) => {
   const { getComputedStyle } = dom.window
   const { width, height } = getComputedStyle(element)
   return parseFloat(width) > 0 && parseFloat(height) > 0
@@ -19,7 +19,7 @@ const testClickingOnAColor = async (dom, t) => {
 
   const colorInfo = document.querySelector(Selectors.colorInfo)
   t.false(
-    await isVisible(dom, colorInfo),
+    isVisible(dom, colorInfo),
     'Color info is not visible before clicking color'
   )
 
@@ -29,7 +29,7 @@ const testClickingOnAColor = async (dom, t) => {
   randomColor.click()
 
   t.true(
-    await isVisible(dom, colorInfo),
+    isVisible(dom, colorInfo),
     'After clicking a color, color info should be visible'
   )
 
@@ -44,12 +44,12 @@ const testClosingColorInfo = async (dom, t) => {
   const { document } = dom.window
 
   const colorInfo = document.querySelector(Selectors.colorInfo)
-  t.true(await isVisible(dom, colorInfo), 'Color info is visible before clicking close')
+  t.true(isVisible(dom, colorInfo), 'Color info is visible before clicking close')
 
   const closeColorInfo = document.querySelector(Selectors.closeColorInfo)
   closeColorInfo.click()
 
-  t.false(await isVisible(dom, colorInfo), 'Color info is not visible after closing it')
+  t.false(isVisible(dom, colorInfo), 'Color info is not visible after closing it')
 }
 
 test('App should load with colors of a hue', async t => {
