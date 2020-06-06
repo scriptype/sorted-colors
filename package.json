@@ -56,7 +56,7 @@
     "jsdom": "^16.2.2",
     "node-sass": "^4.12.0",
     "postcss-clamp": "^1.1.0",
-    "tap-spec": "github:sievins/tap-spec",
+    "tap-spec": "github:scriptype/tap-spec",
     "tape": "^5.0.1",
     "tape-watch": "^2.3.0",
     "webpack": "^4.29.6",
