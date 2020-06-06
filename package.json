@@ -10,7 +10,7 @@
     "task": "gulp -f ./build/gulpfile.js --cwd ./ --continue",
     "tasks": "gulp --tasks-simple -f ./build/gulpfile.js --cwd ./ --continue",
     "test": "tape src/**/*.spec.js | tap-diff",
-    "test:watch": "tape-watch src/**/*.spec.js -p tap-diff"
+    "test:watch": "tape-watch src/**/*.spec.js -p tap-spec"
   },
   "config": {
     "srcDir": "src/",
@@ -56,7 +56,7 @@
     "jsdom": "^16.2.2",
     "node-sass": "^4.12.0",
     "postcss-clamp": "^1.1.0",
-    "tap-diff": "^0.1.1",
+    "tap-spec": "github:sievins/tap-spec",
     "tape": "^5.0.1",
     "tape-watch": "^2.3.0",
     "webpack": "^4.29.6",
