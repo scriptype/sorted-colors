@@ -77,12 +77,27 @@ test('Closing color info', async t => {
   await testClosingColorInfo(dom, t)
 })
 
-  const colorInfo = document.querySelector(Selectors.colorInfo)
+test('Changing hue', async t => {
+  const dom = await loadDOM(true)
+  const { document, InputEvent } = dom.window
 
-  await testClickingOnAColor(dom, t)
-  t.true(await isVisible(dom, colorInfo), 'Color info is visible after clicking on a color')
+  const hueSlider = document.querySelector(Selectors.hueSlider)
+  const currentHue = Number(hueSlider.value)
 
-  const closeColorInfo = document.querySelector(Selectors.closeColorInfo)
-  closeColorInfo.click()
-  t.false(await isVisible(dom, colorInfo), 'Color info is not visible after closing it')
+  const colors = Array.from(
+    document.querySelectorAll(Selectors.colorButtons)
+  ).map(btn => btn.textContent.trim())
+
+  hueSlider.value = 360 - currentHue > 180
+    ? currentHue + 10 + Math.round(Math.random() * 60)
+    : currentHue - 10 - Math.round(Math.random() * 60)
+  hueSlider.dispatchEvent(new InputEvent('input'))
+
+  await new Promise(resolve => setTimeout(resolve, 500))
+
+  const newColors = Array.from(
+    document.querySelectorAll(Selectors.colorButtons)
+  )
+
+  t.isNotDeepEqual(colors, newColors, 'Changing hue resulted in different colors')
 })
