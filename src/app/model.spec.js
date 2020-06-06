@@ -2,7 +2,7 @@ const test = require('tape')
 const loadDOM = require('../../test-helpers/load-dom')
 
 test('Model.setColorsData', async t => {
-  const dom = await loadDOM
+  const dom = await loadDOM()
   const { Model } = dom.window.modules
 
   const isColor = thing => {

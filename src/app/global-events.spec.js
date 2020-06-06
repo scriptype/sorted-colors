@@ -2,7 +2,7 @@ const test = require('tape')
 const loadDOM = require('../../test-helpers/load-dom')
 
 test('GlobalEvents.onKeyUp', async t => {
-  const dom = await loadDOM
+  const dom = await loadDOM()
   const { GlobalEvents, Utils } = dom.window.modules
 
   const eventListener = event => {

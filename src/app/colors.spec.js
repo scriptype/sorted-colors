@@ -2,7 +2,7 @@ const test = require('tape')
 const loadDOM = require('../../test-helpers/load-dom')
 
 test('Colors.removeAlternativeColors', async t => {
-  const dom = await loadDOM
+  const dom = await loadDOM()
   const { Colors } = dom.window.modules
 
   const colorList = [
@@ -49,7 +49,7 @@ test('Colors.removeAlternativeColors', async t => {
 })
 
 test('Colors.parseColorStrings', async t => {
-  const dom = await loadDOM
+  const dom = await loadDOM()
   const { Colors } = dom.window.modules
 
   t.deepLooseEqual(
@@ -66,7 +66,7 @@ test('Colors.parseColorStrings', async t => {
 })
 
 test('Colors.isMonochrome', async t => {
-  const dom = await loadDOM
+  const dom = await loadDOM()
   const { Colors } = dom.window.modules
 
   const monochromeColor = {
@@ -89,7 +89,7 @@ test('Colors.isMonochrome', async t => {
 })
 
 test('Colors.isNonMonochrome', async t => {
-  const dom = await loadDOM
+  const dom = await loadDOM()
   const { Colors } = dom.window.modules
 
   const nonMonochromeColor = {
@@ -112,7 +112,7 @@ test('Colors.isNonMonochrome', async t => {
 })
 
 test('Colors.filterColorsByHue', async t => {
-  const dom = await loadDOM
+  const dom = await loadDOM()
   const { Colors } = dom.window.modules
 
   const tolerance = 5
@@ -233,7 +233,7 @@ test('Colors.filterColorsByHue', async t => {
 })
 
 test('Colors.groupColorsByLightness', async t => {
-  const dom = await loadDOM
+  const dom = await loadDOM()
   const { Colors } = dom.window.modules
 
   const tolerance = 5
@@ -337,7 +337,7 @@ test('Colors.groupColorsByLightness', async t => {
  * - Inside groups, sort colors by their saturation.
  */
 test('Colors.groupColors', async t => {
-  const dom = await loadDOM
+  const dom = await loadDOM()
   const { Colors } = dom.window.modules
 
   const hue = 120
@@ -420,7 +420,7 @@ test('Colors.groupColors', async t => {
 })
 
 test('Colors.formatRGB', async t => {
-  const dom = await loadDOM
+  const dom = await loadDOM()
   const { Colors } = dom.window.modules
 
   t.same(
@@ -431,7 +431,7 @@ test('Colors.formatRGB', async t => {
 })
 
 test('Colors.formatHSL', async t => {
-  const dom = await loadDOM
+  const dom = await loadDOM()
   const { Colors } = dom.window.modules
 
   t.same(

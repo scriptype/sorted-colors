@@ -2,7 +2,7 @@ const test = require('tape')
 const loadDOM = require('../../test-helpers/load-dom')
 
 test('Utils.randomFrom', async t => {
-  const dom = await loadDOM
+  const dom = await loadDOM()
   const { Utils } = dom.window.modules
 
   const collect = storage => {
@@ -36,7 +36,7 @@ test('Utils.randomFrom', async t => {
 })
 
 test('Utils.getNumbers', async t => {
-  const dom = await loadDOM
+  const dom = await loadDOM()
   const { Utils } = dom.window.modules
 
   const count = 5
@@ -49,7 +49,7 @@ test('Utils.getNumbers', async t => {
 })
 
 test('Utils.wait', async t => {
-  const dom = await loadDOM
+  const dom = await loadDOM()
   const { Utils } = dom.window.modules
 
   const duration = 300
@@ -71,7 +71,7 @@ test('Utils.wait', async t => {
 })
 
 test('Utils.query', async t => {
-  const dom = await loadDOM
+  const dom = await loadDOM()
   const { Utils } = dom.window.modules
 
   t.same(
@@ -93,7 +93,7 @@ test('Utils.query', async t => {
 })
 
 test('Utils.queryAll', async t => {
-  const dom = await loadDOM
+  const dom = await loadDOM()
   const { Utils } = dom.window.modules
 
   const result = Utils.queryAll('*')
@@ -115,7 +115,7 @@ test('Utils.queryAll', async t => {
 })
 
 test('Utils.queryId', async t => {
-  const dom = await loadDOM
+  const dom = await loadDOM()
   const { Utils } = dom.window.modules
 
   t.is(
@@ -126,7 +126,7 @@ test('Utils.queryId', async t => {
 })
 
 test('Utils.getKeyCode', async t => {
-  const dom = await loadDOM
+  const dom = await loadDOM()
   const { Utils } = dom.window.modules
 
   t.is(

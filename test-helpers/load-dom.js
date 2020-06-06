@@ -9,7 +9,7 @@ const htmlPath = path.resolve(__dirname, '..', config.distDir, 'index.html')
 
 const readFile = util.promisify(fs.readFile)
 
-const loadDOM = readFile(htmlPath)
+const loadDOM = () => readFile(htmlPath)
   .then(html => new JSDOM(html, {
     url: `file:///${htmlPath}`,
     resources: 'usable',
@@ -18,9 +18,8 @@ const loadDOM = readFile(htmlPath)
   .then(dom => {
     return new Promise(resolve => {
       const limit = 100
-      let pollCount = 0
+      const pollCount = 0
       const interval = setInterval(() => {
-        console.log('polling dom:', pollCount++, `/ ${limit}`)
         if (dom.window.document.querySelector('#chart').childNodes.length) {
           clearInterval(interval)
           resolve(dom)
@@ -28,7 +27,7 @@ const loadDOM = readFile(htmlPath)
         if (pollCount >= limit) {
           clearInterval(interval)
         }
-      }, 100)
+      }, 1000 / 60)
     })
   })
 

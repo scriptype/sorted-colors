@@ -2,7 +2,7 @@ const test = require('tape')
 const loadDOM = require('../../test-helpers/load-dom')
 
 test('EventEmitter.listen', async t => {
-  const dom = await loadDOM
+  const dom = await loadDOM()
   const { EventEmitter: createEventEmitter } = dom.window.modules
 
   const myEventEmitter = createEventEmitter()
@@ -17,7 +17,7 @@ test('EventEmitter.listen', async t => {
 })
 
 test('EventEmitter.emit', async t => {
-  const dom = await loadDOM
+  const dom = await loadDOM()
   const { EventEmitter: createEventEmitter } = dom.window.modules
 
   t.plan(2)

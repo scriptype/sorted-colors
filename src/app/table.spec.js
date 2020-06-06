@@ -30,7 +30,7 @@ const exampleTableMarkup = `
 `
 
 test('Table.parseDataFromTable', async t => {
-  const dom = await loadDOM
+  const dom = await loadDOM()
   const { Table } = dom.window.modules
 
   const container = dom.window.document.createElement('div')
