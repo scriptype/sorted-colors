@@ -1,9 +1,11 @@
 const test = require('tape')
 const loadDOM = require('../../test-helpers/load-dom')
+const { wait } = require('../../test-helpers/utils')
 
 const Selectors = {
-  colorButtons: '.color-button',
   hueSlider: '#hue-slider',
+  monoToggle: '#mono-toggle',
+  colorButtons: '.color-button',
   colorInfo: '#color-info',
   closeColorInfo: '#close-color-info'
 }
@@ -93,11 +95,48 @@ test('Changing hue', async t => {
     : currentHue - 10 - Math.round(Math.random() * 60)
   hueSlider.dispatchEvent(new InputEvent('input'))
 
-  await new Promise(resolve => setTimeout(resolve, 500))
-
   const newColors = Array.from(
     document.querySelectorAll(Selectors.colorButtons)
   )
 
   t.isNotDeepEqual(colors, newColors, 'Changing hue resulted in different colors')
+})
+
+test('Toggling mono', async t => {
+  const dom = await loadDOM(true)
+  const { document } = dom.window
+
+  const monoToggle = document.querySelector(Selectors.monoToggle)
+
+  const colors = Array.from(
+    document.querySelectorAll(Selectors.colorButtons)
+  ).map(btn => btn.textContent.trim())
+
+  monoToggle.click()
+
+  await wait(1000)
+  await testClickingOnAColor(dom, t)
+
+  const newColors = Array.from(
+    document.querySelectorAll(Selectors.colorButtons)
+  ).map(btn => btn.textContent.trim())
+
+  t.isNotDeepEqual(colors, newColors, 'Toggling mono resulted in different colors')
+
+  t.true(
+    !colors.includes('black') && newColors.includes('black'),
+    'Black is visible only after toggling mono'
+  )
+
+  monoToggle.click()
+
+  await wait(1000)
+  await testClickingOnAColor(dom, t)
+
+  const newestColors = Array.from(
+    document.querySelectorAll(Selectors.colorButtons)
+  ).map(btn => btn.textContent.trim())
+
+  t.isNotDeepEqual(newColors, newestColors, 'Toggling mono back changed the colors again')
+  t.deepLooseEqual(newestColors, colors, 'Newest colors are same as initial colors')
 })
