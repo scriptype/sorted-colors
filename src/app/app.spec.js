@@ -40,8 +40,20 @@ const testClickingOnAColor = async (dom, t) => {
   )
 }
 
+const testClosingColorInfo = async (dom, t) => {
+  const { document } = dom.window
+
+  const colorInfo = document.querySelector(Selectors.colorInfo)
+  t.true(await isVisible(dom, colorInfo), 'Color info is visible before clicking close')
+
+  const closeColorInfo = document.querySelector(Selectors.closeColorInfo)
+  closeColorInfo.click()
+
+  t.false(await isVisible(dom, colorInfo), 'Color info is not visible after closing it')
+}
+
 test('App should load with colors of a hue', async t => {
-  const dom = await loadDOM()
+  const dom = await loadDOM(true)
   const { document } = dom.window
 
   const colorButtons = Array.from(document.querySelectorAll(Selectors.colorButtons))
@@ -54,14 +66,16 @@ test('App should load with colors of a hue', async t => {
   t.true(Number(hueSlider.value) <= 360, "But also, it can't be bigger than 360")
 })
 
-test('When clicked on a color, color info should show up with that color', async t => {
-  const dom = await loadDOM()
+test('Clicking on a color', async t => {
+  const dom = await loadDOM(true)
   await testClickingOnAColor(dom, t)
 })
 
-test('Clicking on close button should close color info', async t => {
-  const dom = await loadDOM()
-  const { document } = dom.window
+test('Closing color info', async t => {
+  const dom = await loadDOM(true)
+  await testClickingOnAColor(dom, t)
+  await testClosingColorInfo(dom, t)
+})
 
   const colorInfo = document.querySelector(Selectors.colorInfo)
 
