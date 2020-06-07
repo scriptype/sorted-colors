@@ -1,6 +1,6 @@
 :root {
   --show-info-duration: .3s;
-  --content-width: max(400px, min(80vmin, 800px));
+  --content-width: max(340px, min(80vmin, 800px));
   --font-size: max(14px, min(3vmin, 20px)); }
 
 body {
