@@ -422,6 +422,9 @@ body {
     margin-bottom: .33em;
     overflow: hidden;
     outline: none; }
+    @media (max-width: 600px) {
+      .color-info-name {
+        font-size: 2em; } }
   .color-info .marquee {
     display: inline-block;
     -webkit-animation: marquee 4s 1s infinite;

@@ -44,6 +44,10 @@
     margin-bottom: .33em;
     overflow: hidden;
     outline: none;
+
+    @media (max-width: 600px) {
+      font-size: 2em;
+    }
   }
 
   .marquee {
