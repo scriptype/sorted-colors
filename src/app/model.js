@@ -25,11 +25,6 @@ window.modules.Model = (({
     colorsData: []
   }
 
-  const setup = ({ colorsTableId, onChange }) => {
-    setColorsData(colorsTableId)
-    update()
-  }
-
   const setColorsData = (tableId, storage = state) => {
     const colorsData = parseDataFromTable(queryId(tableId))
     const uniqueColors = removeAlternativeColors(colorsData.rows)
@@ -61,6 +56,11 @@ window.modules.Model = (({
     const newState = getNewState({ hue, mono, ...rest })
     Object.assign(state, newState)
     eventEmitter.emit('change')
+  }
+
+  const setup = ({ colorsTableId, initialState }) => {
+    setColorsData(colorsTableId)
+    update(initialState)
   }
 
   return {

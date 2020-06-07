@@ -32,6 +32,7 @@ window.modules.views.HueControl = (({
     dom.hueSlider.classList.toggle('mono', !!mono)
     dom.toleranceText.classList.toggle('hidden', !!mono)
     dom.saturationAxis.classList.toggle('hidden', !!mono)
+    dom.monoToggle.checked = !!mono
     if (mono) {
       dom.hueValueDisplay.innerText = 0
     } else {

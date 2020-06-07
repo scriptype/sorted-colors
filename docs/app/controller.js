@@ -1,4 +1,6 @@
 window.modules.Controller = (({
+  Router,
+  Routes,
   GlobalEvents,
   Model,
   Table: {
@@ -16,8 +18,23 @@ window.modules.Controller = (({
   }
 }) => {
   const init = () => {
-    Chart.render();
-    HueControl.render();
+    const initialState = Router.getState();
+
+    if (!initialState) {
+      Chart.render();
+      HueControl.render();
+      return;
+    }
+
+    console.log('initialState', initialState);
+    Model.update({
+      mono: initialState.mono,
+      hue: initialState.mono ? 0 : initialState.hue
+    });
+
+    if (initialState.color) {
+      showColorInfo(initialState.color);
+    }
   };
 
   const showColorInfo = colorId => {
@@ -28,11 +45,20 @@ window.modules.Controller = (({
     Chart.activateColor(colorId);
     const color = Model.data.colorsData.find(c => c.name === colorId);
     ColorInfo.show(color);
+    Router.navigate('colorView', {
+      mono: Model.data.mono,
+      hue: Model.data.hue,
+      color: color.name
+    });
   };
 
   const hideColorInfo = shouldFocusBack => {
     Chart.deactivateColor(shouldFocusBack);
     ColorInfo.hide();
+    Router.navigate('hueView', {
+      mono: Model.data.mono,
+      hue: Model.data.hue
+    });
   };
 
   const toggleMono = isOn => {
@@ -45,10 +71,18 @@ window.modules.Controller = (({
       prevHue: hue,
       hue: isOn ? 0 : prevHue
     });
+    Router.navigate('hueView', {
+      mono: isOn,
+      hue: hue
+    });
     hideColorInfo();
   };
 
   const setHue = hue => {
+    Router.navigate('hueView', {
+      mono: Model.data.mono,
+      hue
+    });
     Model.update({
       hue
     });
@@ -69,6 +103,9 @@ window.modules.Controller = (({
   });
   ColorInfo.setup({
     onClose: hideColorInfo.bind(null, true)
+  });
+  Router.setup({
+    routes: Routes
   });
   Model.setup({
     colorsTableId: 'colorsTable'
