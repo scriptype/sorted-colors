@@ -1,6 +1,6 @@
 const test = require('tape')
 const loadDOM = require('../../test-helpers/load-dom')
-const { wait } = require('../../test-helpers/utils')
+const { wait, assertSilent } = require('../../test-helpers/utils')
 
 const Selectors = {
   hueSlider: '#hue-slider',
@@ -16,42 +16,42 @@ const isVisible = (dom, element) => {
   return parseFloat(width) > 0 && parseFloat(height) > 0
 }
 
-const testClickingOnAColor = async (dom, t) => {
+const clickRandomColor = async (dom, t, { silent } = {}) => {
   const { document } = dom.window
 
   const colorInfo = document.querySelector(Selectors.colorInfo)
-  t.false(
-    isVisible(dom, colorInfo),
-    'Color info is not visible before clicking color'
+  assertSilent(
+    t, !isVisible(dom, colorInfo), 'Color info is not visible before clicking color', silent
   )
 
   const colorButtons = Array.from(document.querySelectorAll(Selectors.colorButtons))
   const randomColor = colorButtons[Math.floor(Math.random() * colorButtons.length)]
 
   randomColor.click()
-
-  t.true(
-    isVisible(dom, colorInfo),
-    'After clicking a color, color info should be visible'
+  assertSilent(
+    t, isVisible(dom, colorInfo), 'After clicking a color, color info should be visible', silent
   )
 
   const colorName = randomColor.textContent.trim()
-  t.true(
-    colorInfo.textContent.match(new RegExp(colorName, 'gi')),
-    'Color info shows correct color'
+  assertSilent(
+    t, colorInfo.textContent.match(new RegExp(colorName, 'gi')), 'Color info shows correct color', silent
   )
 }
 
-const testClosingColorInfo = async (dom, t) => {
+const deactivateColorInfo = async (dom, t, { silent } = {}) => {
   const { document } = dom.window
 
   const colorInfo = document.querySelector(Selectors.colorInfo)
-  t.true(isVisible(dom, colorInfo), 'Color info is visible before clicking close')
+  assertSilent(
+    t, isVisible(dom, colorInfo), 'Color info is visible before clicking close', silent
+  )
 
   const closeColorInfo = document.querySelector(Selectors.closeColorInfo)
   closeColorInfo.click()
 
-  t.false(isVisible(dom, colorInfo), 'Color info is not visible after closing it')
+  assertSilent(
+    t, !isVisible(dom, colorInfo), 'Color info is not visible after closing it', silent
+  )
 }
 
 test('App should load with colors of a hue', async t => {
@@ -64,19 +64,19 @@ test('App should load with colors of a hue', async t => {
 
   const hueSlider = document.querySelector(Selectors.hueSlider)
   t.true(hueSlider.value !== undefined, 'Hue slider has a value')
-  t.true(Number(hueSlider.value) > 0, 'And that value is bigger than 0 (0 is not an example hue)')
+  t.true(Number(hueSlider.value) > 0, "And it's bigger than 0 (0 is not an example hue)")
   t.true(Number(hueSlider.value) <= 360, "But also, it can't be bigger than 360")
 })
 
 test('Clicking on a color', async t => {
   const dom = await loadDOM(true)
-  await testClickingOnAColor(dom, t)
+  await clickRandomColor(dom, t)
 })
 
 test('Closing color info', async t => {
   const dom = await loadDOM(true)
-  await testClickingOnAColor(dom, t)
-  await testClosingColorInfo(dom, t)
+  await clickRandomColor(dom, t, { silent: true })
+  await deactivateColorInfo(dom, t)
 })
 
 test('Changing hue', async t => {
@@ -100,6 +100,14 @@ test('Changing hue', async t => {
   )
 
   t.isNotDeepEqual(colors, newColors, 'Changing hue resulted in different colors')
+
+  await wait(800)
+  await clickRandomColor(dom, t, { silent: true })
+  t.pass('Activating a color worked in new hue')
+
+  await wait(800)
+  await deactivateColorInfo(dom, t, { silent: true })
+  t.pass('Closing color info worked in new hue')
 })
 
 test('Toggling mono', async t => {
@@ -107,15 +115,16 @@ test('Toggling mono', async t => {
   const { document } = dom.window
 
   const monoToggle = document.querySelector(Selectors.monoToggle)
+  const colorInfo = document.querySelector(Selectors.colorInfo)
 
   const colors = Array.from(
     document.querySelectorAll(Selectors.colorButtons)
   ).map(btn => btn.textContent.trim())
 
-  monoToggle.click()
+  await clickRandomColor(dom, t, { silent: true })
 
-  await wait(1000)
-  await testClickingOnAColor(dom, t)
+  monoToggle.click()
+  t.false(isVisible(dom, colorInfo), 'Previously visible color info got closed after clicking mono')
 
   const newColors = Array.from(
     document.querySelectorAll(Selectors.colorButtons)
@@ -125,13 +134,18 @@ test('Toggling mono', async t => {
 
   t.true(
     !colors.includes('black') && newColors.includes('black'),
-    'Black is visible only after toggling mono'
+    'Black is visible only after switching mono on'
   )
+
+  await wait(800)
+  await clickRandomColor(dom, t, { silent: true })
+  t.pass('Activating a color worked when mono is on')
 
   monoToggle.click()
 
-  await wait(1000)
-  await testClickingOnAColor(dom, t)
+  await wait(800)
+  await clickRandomColor(dom, t, { silent: true })
+  t.pass('Activating a color worked after switching-off mono')
 
   const newestColors = Array.from(
     document.querySelectorAll(Selectors.colorButtons)
