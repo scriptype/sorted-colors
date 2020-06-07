@@ -2,6 +2,9 @@ const test = require('tape')
 const loadDOM = require('../../test-helpers/load-dom')
 const { wait, assertSilent } = require('../../test-helpers/utils')
 
+// A bit longer than actual, to be on the safe side
+const ANIMATION_DURATION = 700
+
 const Selectors = {
   hueSlider: '#hue-slider',
   monoToggle: '#mono-toggle',
@@ -106,11 +109,11 @@ test('Changing hue', async t => {
 
   t.isNotDeepEqual(colors, newColors, 'Changing hue resulted in different colors')
 
-  await wait(800)
+  await wait(ANIMATION_DURATION)
   await clickRandomColor(dom, t, { silent: true })
   t.pass('Activating a color worked in new hue')
 
-  await wait(800)
+  await wait(ANIMATION_DURATION)
   await deactivateColorInfo(dom, t, { silent: true })
   t.pass('Closing color info worked in new hue')
 })
@@ -142,13 +145,13 @@ test('Toggling mono', async t => {
     'Black is visible only after switching mono on'
   )
 
-  await wait(800)
+  await wait(ANIMATION_DURATION)
   await clickRandomColor(dom, t, { silent: true })
   t.pass('Activating a color worked when mono is on')
 
   monoToggle.click()
 
-  await wait(800)
+  await wait(ANIMATION_DURATION)
   await clickRandomColor(dom, t, { silent: true })
   t.pass('Activating a color worked after switching-off mono')
 
