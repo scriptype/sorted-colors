@@ -52,7 +52,10 @@
 
   .marquee {
     display: inline-block;
-    animation: marquee 4s 1s infinite;
+
+    &-active {
+      animation: marquee 4s .5s infinite;
+    }
   }
 
   @keyframes marquee {

@@ -81,11 +81,10 @@ window.modules.views.ColorInfo = (({
       queryAll('.marquee', dom.colorInfo).forEach(item => {
         const width = item.offsetWidth
         const widthDiff = containerWidth - width
-        if (widthDiff >= 0) {
-          item.classList.remove('marquee')
-          return
+        if (widthDiff < 0) {
+          item.classList.add('marquee-active')
+          item.style.setProperty('--marquee-amount', `${widthDiff}px`)
         }
-        item.style.setProperty('--marquee-amount', `${widthDiff}px`)
       })
     })
   }

@@ -52,9 +52,10 @@
       .color-info-name {
         font-size: 2em; } }
   .color-info .marquee {
-    display: inline-block;
-    -webkit-animation: marquee 4s 1s infinite;
-    animation: marquee 4s 1s infinite; }
+    display: inline-block; }
+    .color-info .marquee-active {
+      -webkit-animation: marquee 4s .5s infinite;
+      animation: marquee 4s .5s infinite; }
 
 @-webkit-keyframes marquee {
   from, 12%, 88%, to {
