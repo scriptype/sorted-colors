@@ -84,7 +84,10 @@ test('Changing hue', async t => {
   const { document, InputEvent } = dom.window
 
   const hueSlider = document.querySelector(Selectors.hueSlider)
+  const colorInfo = document.querySelector(Selectors.colorInfo)
   const currentHue = Number(hueSlider.value)
+
+  await clickRandomColor(dom, t, { silent: true })
 
   const colors = Array.from(
     document.querySelectorAll(Selectors.colorButtons)
@@ -94,6 +97,8 @@ test('Changing hue', async t => {
     ? currentHue + 10 + Math.round(Math.random() * 60)
     : currentHue - 10 - Math.round(Math.random() * 60)
   hueSlider.dispatchEvent(new InputEvent('input'))
+
+  t.false(isVisible(dom, colorInfo), 'Previously visible color info got closed after changing hue')
 
   const newColors = Array.from(
     document.querySelectorAll(Selectors.colorButtons)
