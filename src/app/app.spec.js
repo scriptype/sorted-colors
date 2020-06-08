@@ -82,6 +82,17 @@ test('Closing color info', async t => {
   await deactivateColorInfo(dom, t)
 })
 
+test('Closing color info with ESC', async t => {
+  const dom = await loadDOM(true)
+  const { document, KeyboardEvent } = dom.window
+  const colorInfo = document.querySelector(Selectors.colorInfo)
+
+  await clickRandomColor(dom, t, { silent: true })
+  dom.window.dispatchEvent(new KeyboardEvent('keyup', { keyCode: 27 }))
+
+  t.true(!isVisible(dom, colorInfo), 'Pressing ESC closes the color info')
+})
+
 test('Changing hue', async t => {
   const dom = await loadDOM(true)
   const { document, InputEvent } = dom.window
