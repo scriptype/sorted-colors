@@ -1,6 +1,6 @@
 window.modules.views.ColorInfo = (({
   Utils: { wait, query, queryId, queryAll },
-  Colors: { formatRGB, formatHSL }
+  Model: { getFormattedRGB, getFormattedHSL }
 }) => {
   const dom = {
     colorInfo: queryId('color-info')
@@ -42,11 +42,11 @@ window.modules.views.ColorInfo = (({
         </p>
 
         <p class="selectable color-info-row color-info-row--rgb" tabindex="0">
-          ${formatRGB(rgb)}
+          ${getFormattedRGB(rgb)}
         </p>
 
         <p class="selectable color-info-row color-info-row--hsl" tabindex="0">
-          ${formatHSL(hsl)}
+          ${getFormattedHSL(hsl)}
         </p>
 
         <button

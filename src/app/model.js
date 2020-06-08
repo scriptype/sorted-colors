@@ -5,7 +5,7 @@ window.modules.Model = (({
     createState
   },
   Table: { parseDataFromTable },
-  Colors: { groupColors, removeAlternativeColors, parseColorStrings },
+  Colors: { groupColors, removeAlternativeColors, parseColorStrings, formatRGB, formatHSL },
   EventEmitter: createEventEmitter
 }) => {
   const Settings = {
@@ -36,6 +36,9 @@ window.modules.Model = (({
     const parsedUniqueColors = uniqueColors.map(parseColorStrings)
     storage.colorsData = parsedUniqueColors
   }
+
+  const getFormattedRGB = formatRGB
+  const getFormattedHSL = formatHSL
 
   const getNewState = ({ hue, mono, ...rest }) => {
     const newHue = typeof hue !== 'undefined' ? hue : state.hue
@@ -69,7 +72,8 @@ window.modules.Model = (({
     update,
     data: state,
 
-    // Exports for tests
-    setColorsData
+    setColorsData,
+    getFormattedRGB,
+    getFormattedHSL
   }
 })(window.modules)
