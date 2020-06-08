@@ -1,14 +1,6 @@
 window.modules.Controller = (({
   GlobalEvents,
   Model,
-  Table: {
-    parseDataFromTable
-  },
-  Colors: {
-    groupColors,
-    removeAlternativeColors,
-    parseColorStrings
-  },
   views: {
     HueControl,
     Chart,
@@ -25,6 +17,9 @@ window.modules.Controller = (({
       return;
     }
 
+    Model.update({
+      colorId
+    });
     Chart.activateColor(colorId);
     const color = Model.data.colorsData.find(c => c.name === colorId);
     ColorInfo.show(color);
@@ -55,7 +50,7 @@ window.modules.Controller = (({
     hideColorInfo();
   };
 
-  GlobalEvents.onKeyUp('escape', () => {
+  GlobalEvents.onKeyUp('Escape', () => {
     if (ColorInfo.isActive()) {
       hideColorInfo(true);
     }
@@ -68,7 +63,16 @@ window.modules.Controller = (({
     onClickColor: showColorInfo
   });
   ColorInfo.setup({
-    onClose: hideColorInfo.bind(null, true)
+    onClose: hideColorInfo.bind(null, true),
+
+    onMovePrev() {
+      console.log(Model.getPreviousColor());
+    },
+
+    onMoveNext() {
+      console.log(Model.getNextColor());
+    }
+
   });
   Model.setup({
     colorsTableId: 'colorsTable'

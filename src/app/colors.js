@@ -1,7 +1,7 @@
 window.modules.Colors = (({
   Utils: { getNumbers }
 }) => {
-  const { abs } = Math
+  const { abs, max } = Math
 
   /*
    * For each color in colorList, check if there's an equivalent color
@@ -65,6 +65,63 @@ window.modules.Colors = (({
     }
   }
 
+  const findNextColor = ({
+    groupedColors,
+    allColors,
+    hue,
+    mono,
+    tolerance,
+    colorId,
+    direction = 1,
+    callLimit = 360
+  }) => {
+    const lightnessGroup = groupedColors.find(group => {
+      return group.find(c => c.name === colorId)
+    })
+
+    const color = lightnessGroup.find(c => c.name === colorId)
+    const colorIndex = lightnessGroup.indexOf(color)
+    const lastColorIndex = direction === 1 ? lightnessGroup.length - 1 : 0
+
+    if (colorIndex !== lastColorIndex) {
+      return lightnessGroup[colorIndex + direction]
+    }
+
+    const lightnessGroupIndex = groupedColors.indexOf(lightnessGroup)
+    const lastGroupIndex = direction === 1 ? groupedColors.length - 1 : 0
+    if (lightnessGroupIndex !== lastGroupIndex) {
+      return groupedColors[lightnessGroupIndex + direction][0]
+    }
+
+    const hueLimit = max(0, 360 * direction)
+    const hueStart = 360 - hueLimit
+    const reachedLimit = abs(hueLimit - hue + direction)
+    const newHue = reachedLimit ? hueStart : hue + direction
+    const { list: newColorList } = groupColors({
+      hue: newHue,
+      mono,
+      colorList: allColors,
+      tolerance
+    })
+
+    const firstOldColor = groupedColors[0][0]
+    const firstNewColor = newColorList[0][0]
+    if (firstNewColor.name !== firstOldColor.name) {
+      return firstNewColor
+    }
+
+    return callLimit > 0 ? findNextColor({
+      groupedColors: newColorList,
+      allColors,
+      hue: newHue,
+      mono,
+      tolerance,
+      colorId,
+      direction,
+      i: callLimit - 1
+    }) : undefined
+  }
+
   const formatRGB = rgb => `rgb(${rgb.join(', ')})`
 
   const formatHSL = hsl => `hsl(${hsl.map((_, i) => i === 0 ? _ : `${_}%`).join(', ')})`
@@ -77,6 +134,7 @@ window.modules.Colors = (({
     filterColorsByHue,
     groupColorsByLightness,
     groupColors,
+    findNextColor,
     formatRGB,
     formatHSL
   }

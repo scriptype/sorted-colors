@@ -18,7 +18,9 @@ window.modules.Utils = (() => {
   const queryId = document.getElementById.bind(document)
 
   const keyCodes = {
-    27: 'escape'
+    27: 'Escape',
+    37: 'ArrowLeft',
+    39: 'ArrowRight'
   }
 
   const getKeyCode = event => keyCodes[event.which] || keyCodes[event.keyCode]

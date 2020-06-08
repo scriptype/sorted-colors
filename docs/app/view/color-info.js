@@ -5,9 +5,12 @@ window.modules.views.ColorInfo = (({
     queryId,
     queryAll
   },
-  Colors: {
-    formatRGB,
-    formatHSL
+  GlobalEvents: {
+    onKeyUp
+  },
+  Model: {
+    getFormattedRGB,
+    getFormattedHSL
   }
 }) => {
   const dom = {
@@ -18,9 +21,13 @@ window.modules.views.ColorInfo = (({
   };
 
   const setup = ({
-    onClose
+    onClose,
+    onMovePrev,
+    onMoveNext
   }) => {
     props.onClose = onClose;
+    onKeyUp('ArrowLeft', () => isActive() ? onMovePrev() : null);
+    onKeyUp('ArrowRight', () => isActive() ? onMoveNext() : null);
   };
 
   const show = color => {
@@ -52,11 +59,11 @@ window.modules.views.ColorInfo = (({
         </p>
 
         <p class="selectable color-info-row color-info-row--rgb" tabindex="0">
-          ${formatRGB(rgb)}
+          ${getFormattedRGB(rgb)}
         </p>
 
         <p class="selectable color-info-row color-info-row--hsl" tabindex="0">
-          ${formatHSL(hsl)}
+          ${getFormattedHSL(hsl)}
         </p>
 
         <button

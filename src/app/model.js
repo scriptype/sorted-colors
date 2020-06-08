@@ -5,7 +5,7 @@ window.modules.Model = (({
     createState
   },
   Table: { parseDataFromTable },
-  Colors: { groupColors, removeAlternativeColors, parseColorStrings, formatRGB, formatHSL },
+  Colors: { groupColors, removeAlternativeColors, parseColorStrings, formatRGB, formatHSL, findNextColor },
   EventEmitter: createEventEmitter
 }) => {
   const Settings = {
@@ -20,14 +20,10 @@ window.modules.Model = (({
   const state = {
     hue: randomFrom(Settings.exampleHues),
     mono: false,
+    colorId: '',
     colorList: [],
     tolerance: Settings.tolerance.min,
     colorsData: []
-  }
-
-  const setup = ({ colorsTableId, onChange }) => {
-    setColorsData(colorsTableId)
-    update()
   }
 
   const setColorsData = (tableId, storage = state) => {
@@ -39,6 +35,29 @@ window.modules.Model = (({
 
   const getFormattedRGB = formatRGB
   const getFormattedHSL = formatHSL
+
+  const getPreviousColor = () => {
+    return findNextColor({
+      direction: -1,
+      groupedColors: state.colorList,
+      allColors: state.colorsData,
+      hue: state.hue,
+      mono: state.mono,
+      tolerance: Settings.tolerance,
+      colorId: state.colorId
+    })
+  }
+
+  const getNextColor = () => {
+    return findNextColor({
+      groupedColors: state.colorList,
+      allColors: state.colorsData,
+      hue: state.hue,
+      mono: state.mono,
+      tolerance: Settings.tolerance,
+      colorId: state.colorId
+    })
+  }
 
   const getNewState = ({ hue, mono, ...rest }) => {
     const newHue = typeof hue !== 'undefined' ? hue : state.hue
@@ -66,6 +85,11 @@ window.modules.Model = (({
     eventEmitter.emit('change')
   }
 
+  const setup = ({ colorsTableId, onChange }) => {
+    setColorsData(colorsTableId)
+    update()
+  }
+
   return {
     ...eventEmitter,
     setup,
@@ -74,6 +98,8 @@ window.modules.Model = (({
 
     setColorsData,
     getFormattedRGB,
-    getFormattedHSL
+    getFormattedHSL,
+    getPreviousColor,
+    getNextColor
   }
 })(window.modules)

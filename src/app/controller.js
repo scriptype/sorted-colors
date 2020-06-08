@@ -13,6 +13,10 @@ window.modules.Controller = (({
       return
     }
 
+    Model.update({
+      colorId
+    })
+
     Chart.activateColor(colorId)
 
     const color = Model.data.colorsData.find(c => c.name === colorId)
@@ -41,7 +45,7 @@ window.modules.Controller = (({
     hideColorInfo()
   }
 
-  GlobalEvents.onKeyUp('escape', () => {
+  GlobalEvents.onKeyUp('Escape', () => {
     if (ColorInfo.isActive()) {
       hideColorInfo(true)
     }
@@ -57,7 +61,13 @@ window.modules.Controller = (({
   })
 
   ColorInfo.setup({
-    onClose: hideColorInfo.bind(null, true)
+    onClose: hideColorInfo.bind(null, true),
+    onMovePrev() {
+      console.log(Model.getPreviousColor())
+    },
+    onMoveNext() {
+      console.log(Model.getNextColor())
+    }
   })
 
   Model.setup({

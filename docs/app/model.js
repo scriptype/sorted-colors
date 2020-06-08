@@ -20,7 +20,10 @@ window.modules.Model = (({
   Colors: {
     groupColors,
     removeAlternativeColors,
-    parseColorStrings
+    parseColorStrings,
+    formatRGB,
+    formatHSL,
+    findNextColor
   },
   EventEmitter: createEventEmitter
 }) => {
@@ -34,17 +37,10 @@ window.modules.Model = (({
   const state = {
     hue: randomFrom(Settings.exampleHues),
     mono: false,
+    colorId: '',
     colorList: [],
     tolerance: Settings.tolerance.min,
     colorsData: []
-  };
-
-  const setup = ({
-    colorsTableId,
-    onChange
-  }) => {
-    setColorsData(colorsTableId);
-    update();
   };
 
   const setColorsData = (tableId, storage = state) => {
@@ -52,6 +48,32 @@ window.modules.Model = (({
     const uniqueColors = removeAlternativeColors(colorsData.rows);
     const parsedUniqueColors = uniqueColors.map(parseColorStrings);
     storage.colorsData = parsedUniqueColors;
+  };
+
+  const getFormattedRGB = formatRGB;
+  const getFormattedHSL = formatHSL;
+
+  const getPreviousColor = () => {
+    return findNextColor({
+      direction: -1,
+      groupedColors: state.colorList,
+      allColors: state.colorsData,
+      hue: state.hue,
+      mono: state.mono,
+      tolerance: Settings.tolerance,
+      colorId: state.colorId
+    });
+  };
+
+  const getNextColor = () => {
+    return findNextColor({
+      groupedColors: state.colorList,
+      allColors: state.colorsData,
+      hue: state.hue,
+      mono: state.mono,
+      tolerance: Settings.tolerance,
+      colorId: state.colorId
+    });
   };
 
   const getNewState = (_ref) => {
@@ -95,11 +117,22 @@ window.modules.Model = (({
     eventEmitter.emit('change');
   };
 
+  const setup = ({
+    colorsTableId,
+    onChange
+  }) => {
+    setColorsData(colorsTableId);
+    update();
+  };
+
   return _objectSpread(_objectSpread({}, eventEmitter), {}, {
     setup,
     update,
     data: state,
-    // Exports for tests
-    setColorsData
+    setColorsData,
+    getFormattedRGB,
+    getFormattedHSL,
+    getPreviousColor,
+    getNextColor
   });
 })(window.modules);

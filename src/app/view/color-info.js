@@ -1,5 +1,6 @@
 window.modules.views.ColorInfo = (({
   Utils: { wait, query, queryId, queryAll },
+  GlobalEvents: { onKeyUp },
   Model: { getFormattedRGB, getFormattedHSL }
 }) => {
   const dom = {
@@ -10,8 +11,10 @@ window.modules.views.ColorInfo = (({
     onClose: () => {}
   }
 
-  const setup = ({ onClose }) => {
+  const setup = ({ onClose, onMovePrev, onMoveNext }) => {
     props.onClose = onClose
+    onKeyUp('ArrowLeft', () => isActive() ? onMovePrev() : null)
+    onKeyUp('ArrowRight', () => isActive() ? onMoveNext() : null)
   }
 
   const show = (color) => {
