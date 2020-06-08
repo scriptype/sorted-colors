@@ -62,7 +62,6 @@
     -webkit-transform: translateX(0);
     transform: translateX(0); }
   48%, 52% {
-    background: transparent;
     -webkit-transform: translateX(calc( var(--marquee-amount) - .1em));
     transform: translateX(calc( var(--marquee-amount) - .1em)); } }
 
@@ -71,7 +70,6 @@
     -webkit-transform: translateX(0);
     transform: translateX(0); }
   48%, 52% {
-    background: transparent;
     -webkit-transform: translateX(calc( var(--marquee-amount) - .1em));
     transform: translateX(calc( var(--marquee-amount) - .1em)); } }
   .color-info-row {
