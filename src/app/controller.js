@@ -1,8 +1,6 @@
 window.modules.Controller = (({
   GlobalEvents,
   Model,
-  Table: { parseDataFromTable },
-  Colors: { groupColors, removeAlternativeColors, parseColorStrings },
   views: { HueControl, Chart, ColorInfo }
 }) => {
   const init = () => {
