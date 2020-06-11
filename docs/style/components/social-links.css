@@ -1,0 +1,11 @@
+.social-links {
+  position: absolute;
+  top: .5em;
+  right: .5em; }
+
+.social-link {
+  display: inline-block;
+  margin-left: 5px;
+  opacity: .7; }
+  .social-link:hover, .social-link:focus {
+    opacity: 1; }

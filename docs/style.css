@@ -66,12 +66,20 @@ body {
   width: 24px;
   height: 24px; }
 
-.github-link {
+.twitter-icon {
+  width: 24px;
+  height: 24px; }
+
+.social-links {
   position: absolute;
   top: .5em;
-  right: .5em;
+  right: .5em; }
+
+.social-link {
+  display: inline-block;
+  margin-left: 5px;
   opacity: .7; }
-  .github-link:hover, .github-link:focus {
+  .social-link:hover, .social-link:focus {
     opacity: 1; }
 
 .axis {

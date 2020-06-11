@@ -1,24 +1,24 @@
-<!DOCTYPE html> <html lang="en" >
-<head>
-  <meta charset="UTF-8">
-  <title>Sorted CSS Colors</title>
-  <meta name="description" content="CSS colors sorted by their hue, saturation and lightness">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Sorted CSS Colors">
-  <meta name="twitter:description" content="I wanted to create a tool to sort the named CSS colors in a way that it shows related colors together. So, next time I can&#39;t decid...">
-  <meta name="twitter:image" content="https://github.com/scriptype/sorted-colors/raw/master/screenshot.png">
-  <meta name="twitter:creator" content="@scriptype">
-  <meta property="og:image" content="https://github.com/scriptype/sorted-colors/raw/master/screenshot.png" itemprop="thumbnailUrl">
-  <meta property="og:title" content="Sorted CSS Colors">
-  <meta property="og:url" content="https://enes.in/sorted-colors/">
-  <meta property="og:description" content="I wanted to create a tool to sort the named CSS colors in a way that it shows related colors together. So, next time I can&#39;t decid...">
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="icon" type="image/png" href="favicon.png" />
-<link rel="stylesheet" href="./style.css">
-
-</head>
-<body>
-<div class="container">
+<!DOCTYPE html>
+<html lang="en" >
+    <head>
+        <meta charset="UTF-8">
+        <title>Sorted CSS Colors</title>
+        <meta name="description" content="CSS colors sorted by their hue, saturation and lightness">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="Sorted CSS Colors">
+        <meta name="twitter:description" content="I wanted to create a tool to sort the named CSS colors in a way that it shows related colors together. So, next time I can&#39;t decid...">
+        <meta name="twitter:image" content="https://github.com/scriptype/sorted-colors/raw/master/screenshot.png">
+        <meta name="twitter:creator" content="@scriptype">
+        <meta property="og:image" content="https://github.com/scriptype/sorted-colors/raw/master/screenshot.png" itemprop="thumbnailUrl">
+        <meta property="og:title" content="Sorted CSS Colors">
+        <meta property="og:url" content="https://enes.in/sorted-colors/">
+        <meta property="og:description" content="I wanted to create a tool to sort the named CSS colors in a way that it shows related colors together. So, next time I can&#39;t decid...">
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" type="image/png" href="favicon.png" />
+        <link rel="stylesheet" href="./style.css">
+    </head>
+    <body>
+        <div class="container">
   <div class="hue-control">
     <div class="hue-control-row">
       <label for="hue-slider">
@@ -45,11 +45,19 @@
   </div>
 </div>
 
-<a href="https://github.com/scriptype/sorted-colors" target="_blank" class="github-link">
-  <svg class="github-icon" role="img" alt="Check this on Github">
-    <use xlink:href="#github-icon"></use>
-  </svg>
-</a>
+<div class="social-links">
+    <a href="https://twitter.com/scriptype" target="_blank" class="social-link">
+      <svg class="twitter-icon" role="img" aria-label="Follow me on Twitter">
+        <use xlink:href="#twitter-icon"></use>
+      </svg>
+    </a>
+
+    <a href="https://github.com/scriptype/sorted-colors" target="_blank" class="social-link">
+      <svg class="github-icon" role="img" aria-label="Check this on Github">
+        <use xlink:href="#github-icon"></use>
+      </svg>
+    </a>
+</div>
 
 <svg style="display: none" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
   <symbol id="back-icon" viewBox="0 0 16 16">
@@ -58,6 +66,11 @@
 
   <symbol id="github-icon" viewBox="0 0 1024 1024">
   <path d="M512 0C229.25 0 0 229.25 0 512c0 226.25 146.688 418.125 350.156 485.812 25.594 4.688 34.938-11.125 34.938-24.625 0-12.188-.469-52.562-.719-95.312C242 908.812 211.906 817.5 211.906 817.5c-23.312-59.125-56.844-74.875-56.844-74.875-46.531-31.75 3.53-31.125 3.53-31.125 51.406 3.562 78.47 52.75 78.47 52.75 45.688 78.25 119.875 55.625 149 42.5 4.654-33 17.904-55.625 32.5-68.375-113.656-12.937-233.218-56.875-233.218-253.063 0-55.938 19.969-101.562 52.656-137.406-5.219-13-22.844-65.094 5.062-135.562 0 0 42.938-13.75 140.812 52.5 40.812-11.406 84.594-17.031 128.125-17.219 43.5.188 87.312 5.875 128.188 17.281 97.688-66.312 140.688-52.5 140.688-52.5 28 70.531 10.375 122.562 5.125 135.5 32.812 35.844 52.625 81.469 52.625 137.406 0 196.688-119.75 240-233.812 252.688 18.438 15.875 34.75 47 34.75 94.75 0 68.438-.688 123.625-.688 140.5 0 13.625 9.312 29.562 35.25 24.562C877.438 930 1024 738.125 1024 512 1024 229.25 794.75 0 512 0z"/>
+  </symbol>
+
+  <symbol id="twitter-icon" viewBox="0 0 512 512">
+  <path d="M492 109.5c-17.4 7.7-36 12.9-55.6 15.3 20-12 35.4-31 42.6-53.6-18.7 11.1-39.4 19.2-61.5 23.5C399.8 75.8 374.6 64 346.8 64c-53.5 0-96.8 43.4-96.8 96.9 0 7.6.8 15 2.5 22.1-80.5-4-151.9-42.6-199.6-101.3-8.3 14.3-13.1 31-13.1 48.7 0 33.6 17.1 63.3 43.1 80.7C67 210.7 52 206.3 39 199v1.2c0 47 33.4 86.1 77.7 95-8.1 2.2-16.7 3.4-25.5 3.4-6.2 0-12.3-.6-18.2-1.8 12.3 38.5 48.1 66.5 90.5 67.3-33.1 26-74.9 41.5-120.3 41.5-7.8 0-15.5-.5-23.1-1.4C62.9 432 113.8 448 168.4 448 346.6 448 444 300.3 444 172.2c0-4.2-.1-8.4-.3-12.5 18.9-13.7 35.3-30.8 48.3-50.2z"/>
+  </symbol>
 </svg>
 
 <table id="colorsTable" style="display: none">
@@ -1118,25 +1131,24 @@
   </tbody>
 </table>
 
-  <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Map,Set,Element.prototype.matches,Node.prototype.contains"></script>
-<script src="./vendor/inert.min.js"></script>
-<script src="./vendor/select.js"></script>
-<script>
-    window.modules = {
-        views: {}
-    }
-</script>
-<script src="./app/utils.js"></script>
-<script src="./app/event-emitter.js"></script>
-<script src="./app/global-events.js"></script>
-<script src="./app/table.js"></script>
-<script src="./app/colors.js"></script>
-<script src="./app/model.js"></script>
-<script src="./app/view/hue-control.js"></script>
-<script src="./app/view/chart.js"></script>
-<script src="./app/view/color-info.js"></script>
-<script src="./app/controller.js"></script>
-<script src="./index.js"></script>
-
-</body>
+        <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Map,Set,Element.prototype.matches,Node.prototype.contains"></script>
+        <script src="./vendor/inert.min.js"></script>
+        <script src="./vendor/select.js"></script>
+        <script>
+            window.modules = {
+                views: {}
+            }
+        </script>
+        <script src="./app/utils.js"></script>
+        <script src="./app/event-emitter.js"></script>
+        <script src="./app/global-events.js"></script>
+        <script src="./app/table.js"></script>
+        <script src="./app/colors.js"></script>
+        <script src="./app/model.js"></script>
+        <script src="./app/view/hue-control.js"></script>
+        <script src="./app/view/chart.js"></script>
+        <script src="./app/view/color-info.js"></script>
+        <script src="./app/controller.js"></script>
+        <script src="./index.js"></script>
+    </body>
 </html>
