@@ -13,6 +13,7 @@ Here's how it looks:
 - Iconfinder:
   - [Back Icon](https://www.iconfinder.com/icons/326518/arrow_back_icon)
   - [Github Icon](https://www.iconfinder.com/icons/298822/github_mark_icon)
+  - [Twitter Icon](https://www.iconfinder.com/icons/211920/social_twitter_icon)
 
 ## About the repository
 
