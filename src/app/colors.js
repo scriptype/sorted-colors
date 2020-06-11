@@ -65,6 +65,15 @@ window.modules.Colors = (({
     }
   }
 
+  /*
+   * Finds the next color in either direction.
+   *
+   * If there are more colors in the same lightness group as the given color, return first of them
+   *
+   * If there are more lightness groups available in the current list of colors, then move to next group in the given direction and return the first color
+   *
+   * If none of the above is possible, that means the next color is not in the view yet. So, generate the colors of next hue in the direction. Keep generating until finding a different color, then return it.
+   * */
   const findNextColor = ({
     groupedColors,
     allColors,
@@ -75,40 +84,79 @@ window.modules.Colors = (({
     direction = 1,
     callLimit = 360
   }) => {
+    console.log('colorId', colorId, callLimit)
     const lightnessGroup = groupedColors.find(group => {
       return group.find(c => c.name === colorId)
     })
 
-    const color = lightnessGroup.find(c => c.name === colorId)
-    const colorIndex = lightnessGroup.indexOf(color)
-    const lastColorIndex = direction === 1 ? lightnessGroup.length - 1 : 0
+    if (lightnessGroup) {
+      console.log('found the lightness group')
+      const color = lightnessGroup.find(c => c.name === colorId)
+      const colorIndex = lightnessGroup.indexOf(color)
+      const lastColorIndex = direction === 1 ? lightnessGroup.length - 1 : 0
 
-    if (colorIndex !== lastColorIndex) {
-      return lightnessGroup[colorIndex + direction]
+      if (colorIndex !== lastColorIndex) {
+        console.log('same group, next color')
+        return {
+          hue,
+          tolerance: tolerance.min,
+          colorList: groupedColors,
+          color: lightnessGroup[colorIndex + direction]
+        }
+      }
+
+      const lightnessGroupIndex = groupedColors.indexOf(lightnessGroup)
+      const lastGroupIndex = direction === 1 ? groupedColors.length - 1 : 0
+      if (lightnessGroupIndex !== lastGroupIndex) {
+        const newGroupIndex = lightnessGroupIndex + direction
+        const newGroup = groupedColors[newGroupIndex]
+        const newColor = newGroup[direction === 1 ? 0 : newGroup.length - 1]
+        console.log('next group, first color')
+        return {
+          hue,
+          tolerance: tolerance.min,
+          colorList: groupedColors,
+          color: newColor
+        }
+      }
     }
 
-    const lightnessGroupIndex = groupedColors.indexOf(lightnessGroup)
-    const lastGroupIndex = direction === 1 ? groupedColors.length - 1 : 0
-    if (lightnessGroupIndex !== lastGroupIndex) {
-      return groupedColors[lightnessGroupIndex + direction][0]
-    }
+    console.log('will search new colors')
 
     const hueLimit = max(0, 360 * direction)
     const hueStart = 360 - hueLimit
-    const reachedLimit = abs(hueLimit - hue + direction)
-    const newHue = reachedLimit ? hueStart : hue + direction
-    const { list: newColorList } = groupColors({
+    const newHue = hue === hueLimit ? hueStart : hue + direction
+    const { list: newColorList, tolerance: newTolerance } = groupColors({
       hue: newHue,
       mono,
       colorList: allColors,
       tolerance
     })
 
-    const firstOldColor = groupedColors[0][0]
-    const firstNewColor = newColorList[0][0]
-    if (firstNewColor.name !== firstOldColor.name) {
-      return firstNewColor
+    const differentColors = newColorList.map(group => {
+      return group.map(color => {
+        if (groupedColors.every(g => g.every(c => c.name !== color.name))) {
+          return color
+        }
+        return null
+      }).filter(Boolean)
+    }).filter(group => !!group.length)
+
+    if (differentColors.length) {
+      console.log('found it', differentColors)
+      const newGroupIndex = direction === 1 ? 0 : differentColors.length - 1
+      const newGroup = differentColors[newGroupIndex]
+      const newColorIndex = direction === 1 ? 0 : newGroup.length - 1
+      const firstNewColor = newGroup[newColorIndex]
+      return {
+        hue: newHue,
+        tolerance: newTolerance,
+        colorList: newColorList,
+        color: firstNewColor
+      }
     }
+
+    console.log('could not find it, recursing')
 
     return callLimit > 0 ? findNextColor({
       groupedColors: newColorList,
@@ -118,7 +166,7 @@ window.modules.Colors = (({
       tolerance,
       colorId,
       direction,
-      i: callLimit - 1
+      callLimit: callLimit - 1
     }) : undefined
   }
 

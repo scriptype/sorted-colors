@@ -50,6 +50,38 @@ window.modules.Controller = (({
     hideColorInfo();
   };
 
+  const onMovePreviousColor = () => {
+    const {
+      color,
+      hue,
+      tolerance,
+      colorList
+    } = Model.getPreviousColor();
+    Model.update({
+      colorId: color.name,
+      hue,
+      tolerance,
+      colorList
+    });
+    showColorInfo(color.name);
+  };
+
+  const onMoveNextColor = () => {
+    const {
+      color,
+      hue,
+      tolerance,
+      colorList
+    } = Model.getNextColor();
+    Model.update({
+      colorId: color.name,
+      hue,
+      tolerance,
+      colorList
+    });
+    showColorInfo(color.name);
+  };
+
   GlobalEvents.onKeyUp('Escape', () => {
     if (ColorInfo.isActive()) {
       hideColorInfo(true);
@@ -64,15 +96,8 @@ window.modules.Controller = (({
   });
   ColorInfo.setup({
     onClose: hideColorInfo.bind(null, true),
-
-    onMovePrev() {
-      console.log(Model.getPreviousColor());
-    },
-
-    onMoveNext() {
-      console.log(Model.getNextColor());
-    }
-
+    onMovePrev: onMovePreviousColor,
+    onMoveNext: onMoveNextColor
   });
   Model.setup({
     colorsTableId: 'colorsTable'
