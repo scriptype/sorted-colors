@@ -1,5 +1,5 @@
 const Config = {
-  cacheName: 'PWA-7009'
+  cacheName: 'PWA-7010'
 }
 
 const filesToCache = [
