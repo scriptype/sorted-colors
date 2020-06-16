@@ -13,6 +13,6 @@ window.modules.App.init();
 
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('./service-worker.js', {
-    scope: '/'
+    scope: '/sorted-colors/'
   });
 }
