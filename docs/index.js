@@ -12,5 +12,7 @@ window.modules.App = (({
 window.modules.App.init();
 
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('./service-worker.js');
+  navigator.serviceWorker.register('./service-worker.js', {
+    scope: '/'
+  });
 }
