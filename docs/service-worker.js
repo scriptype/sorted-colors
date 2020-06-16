@@ -1,5 +1,5 @@
 const Config = {
-  cacheName: 'PWA-7005'
+  cacheName: 'PWA-7006'
 };
 const filesToCache = ['.', './index.html', './app/global-events.js', './app/controller.js', './app/event-emitter.js', './app/table.js', './app/colors.js', './app/view/chart.js', './app/view/hue-control.js', './app/view/color-info.js', './app/utils.js', './app/model.js', './index.js', './style/reset.css', './style/components/chart.css', './style/components/hue-slider.css', './style/components/hue-control.css', './style/components/social-links.css', './style/components/color-info.css', './style/components/mono-toggle.css', './style/components/axis.css', './style/components/icons.css', './style/helpers.css', './style/mixins.css', './style/base.css', './favicon.png', './style.css', './service-worker.js', './vendor/inert.min.js', './vendor/select.js'];
 self.addEventListener('install', event => {
