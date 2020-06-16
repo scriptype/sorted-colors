@@ -1,5 +1,5 @@
 const Config = {
-  cacheName: 'PWA-7008'
+  cacheName: 'PWA-7009'
 }
 
 const filesToCache = [
@@ -30,9 +30,15 @@ const filesToCache = [
   './style/base.css',
   './favicon.png',
   './style.css',
-  './service-worker.js',
+  './manifest.json',
   './vendor/inert.min.js',
-  './vendor/select.js'
+  './vendor/select.js',
+  './images/icon-256.png',
+  './images/icon-144.png',
+  './images/icon-192.png',
+  './images/icon-152.png',
+  './images/icon-128.png',
+  './images/icon-512.png'
 ]
 
 self.addEventListener('install', event => {
