@@ -46,8 +46,7 @@
     font-weight: 100;
     line-height: 1.3;
     margin-bottom: .33em;
-    overflow: hidden;
-    outline: none; }
+    overflow: hidden; }
     @media (max-width: 600px) {
       .color-info-name {
         font-size: 2em; } }
@@ -75,8 +74,7 @@
   .color-info-row {
     font-size: 1.4em;
     font-weight: 100;
-    margin-bottom: .33rem;
-    outline: none; }
+    margin-bottom: .33rem; }
     .color-info-row--alter {
       font-size: 1.8em; }
   .color-info-close-button {
@@ -108,3 +106,5 @@
       padding-right: 1em; }
     .color-info-close-button .back-icon {
       margin-right: .25em; }
+  .color-info .selectable:focus {
+    outline: none; }
