@@ -32,8 +32,8 @@ window.modules.views.ColorInfo = (({
         </h1>
 
         ${alternativeName ? `
-          <p class="color-info-row color-info-row--alter" tabindex="0">
-            or <span class="selectable">${alternativeName}</span>
+          <p class="color-info-row color-info-row--alter">
+            or <span class="selectable" tabindex="0">${alternativeName}</span>
           </p>
         ` : ''}
 
