@@ -1,3 +1,5 @@
+![Logo](logo-small.png)
+
 # Sorted CSS Colors
 
 I wanted to create a tool to sort the named CSS colors in a way that it shows related colors together. So, next time I can't decide between a few CSS colors, I can just check them here side by side.
@@ -7,6 +9,8 @@ Here's how it looks:
 ![Screenshot](kapture.gif)
 
 ## Credits
+
+- Logo by [Karicca](https://www.behance.net/karicca)
 
 - Table of colors, which I used for parsing color data, is taken from [Eric Meyer's website](https://meyerweb.com/eric/css/colors/) and then modified a bit to serve the purpose better.
 
