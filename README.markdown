@@ -8,6 +8,8 @@ Here's how it looks:
 
 ![Screenshot](kapture.gif)
 
+It's a Progressive Web App! It works both in mobile and desktop, even offline. If you liked the tool I suggest adding it to your home screen / downloading it as desktop app, so you can easily access it whenever you need. Also, please feel free to report any bugs or provide feedbacks by [creating issues](https://github.com/scriptype/sorted-colors/issues).
+
 ## Credits
 
 - Logo by [Karicca](https://www.behance.net/karicca)
