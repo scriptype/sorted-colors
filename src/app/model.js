@@ -5,7 +5,7 @@ window.modules.Model = (({
     createState
   },
   Table: { parseDataFromTable },
-  Colors: { groupColors, removeAlternativeColors, parseColorStrings },
+  Colors: { groupColors, removeAlternativeColors, parseColorStrings, search: searchColors },
   EventEmitter: createEventEmitter
 }) => {
   const Settings = {
@@ -63,13 +63,19 @@ window.modules.Model = (({
     eventEmitter.emit('change')
   }
 
+  const search = (query) => {
+    return searchColors({
+      colorList: state.colorsData,
+      query
+    })
+  }
+
   return {
     ...eventEmitter,
     setup,
     update,
     data: state,
-
-    // Exports for tests
-    setColorsData
+    setColorsData,
+    search
   }
 })(window.modules)

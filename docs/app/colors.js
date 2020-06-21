@@ -19,14 +19,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 window.modules.Colors = (({
   Utils: {
     getNumbers
-  }
+  },
+  Fuse = window.Fuse
 }) => {
   const {
     abs
   } = Math;
   /*
-   * For each color in colorList, check if there's an equivalent color
-   * with a different name.
+   * For each color in colorList, check if there's an equivalent color with a different name.
    * Eliminate the non-preferred colors that have equivalents.
    * A color can be thought "preferred", if it has `alternativeName` field in it.
    * e.g. Eliminates fuchsia and aqua in favor of magenta and cyan, respectively.
@@ -97,6 +97,22 @@ window.modules.Colors = (({
     };
   };
 
+  const search = ({
+    colorList,
+    query,
+    options = {}
+  }) => {
+    const defaultSearchOptions = {
+      includeMatches: true,
+      findAllMatches: true,
+      minMatchCharLength: query.length,
+      treshold: 0.1,
+      keys: ['name', 'rgb', 'hsl', 'hex', 'alternativeName']
+    };
+    const fuse = new Fuse(colorList, _objectSpread(_objectSpread({}, defaultSearchOptions), options));
+    return fuse.search(query);
+  };
+
   const formatRGB = rgb => `rgb(${rgb.join(', ')})`;
 
   const formatHSL = hsl => `hsl(${hsl.map((_, i) => i === 0 ? _ : `${_}%`).join(', ')})`;
@@ -109,6 +125,7 @@ window.modules.Colors = (({
     filterColorsByHue,
     groupColorsByLightness,
     groupColors,
+    search,
     formatRGB,
     formatHSL
   };

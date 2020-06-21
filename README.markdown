@@ -20,6 +20,7 @@ It's a Progressive Web App! It works both in mobile and desktop, even offline. I
   - [Back Icon](https://www.iconfinder.com/icons/326518/arrow_back_icon)
   - [Github Icon](https://www.iconfinder.com/icons/298822/github_mark_icon)
   - [Twitter Icon](https://www.iconfinder.com/icons/211920/social_twitter_icon)
+  - [Search Icon](https://www.iconfinder.com/icons/352091/search_icon)
 
 ## About the repository
 

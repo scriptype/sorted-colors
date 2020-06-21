@@ -70,6 +70,10 @@ body {
   width: 24px;
   height: 24px; }
 
+.search-icon {
+  width: 26px;
+  height: 26px; }
+
 .social-links {
   position: absolute;
   top: .5em;
@@ -267,6 +271,19 @@ body {
   .mono-toggle:checked:focus::after {
     -webkit-box-shadow: 0 0 0 1.5px white, 0 0 0 3px black, 0 0 0 5px white, 0 0 1px 8px rgba(0, 0, 0, 0.6);
     box-shadow: 0 0 0 1.5px white, 0 0 0 3px black, 0 0 0 5px white, 0 0 1px 8px rgba(0, 0, 0, 0.6); }
+
+.search-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: none;
+  border: none;
+  color: inherit;
+  margin: 0;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  margin-left: 2vmin; }
 
 .chart-container {
   position: relative;

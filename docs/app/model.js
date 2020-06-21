@@ -20,7 +20,8 @@ window.modules.Model = (({
   Colors: {
     groupColors,
     removeAlternativeColors,
-    parseColorStrings
+    parseColorStrings,
+    search: searchColors
   },
   EventEmitter: createEventEmitter
 }) => {
@@ -95,11 +96,18 @@ window.modules.Model = (({
     eventEmitter.emit('change');
   };
 
+  const search = query => {
+    return searchColors({
+      colorList: state.colorsData,
+      query
+    });
+  };
+
   return _objectSpread(_objectSpread({}, eventEmitter), {}, {
     setup,
     update,
     data: state,
-    // Exports for tests
-    setColorsData
+    setColorsData,
+    search
   });
 })(window.modules);

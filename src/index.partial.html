@@ -6,6 +6,11 @@
       </label>
       <input class="hue-slider" id="hue-slider" type="range" min="0" max="360" />
       <input type="checkbox" class="mono-toggle" id="mono-toggle" aria-label="Toggle monochrome colors"></input>
+      <button type="button" class="search-button" id="search-button">
+          <svg class="search-icon" role="img" aria-label="Search Colors">
+              <use xlink:href="#search-icon"></use>
+          </svg>
+      </button>
     </div>
 
     <div class="hue-control-row">
@@ -51,7 +56,14 @@
   <symbol id="twitter-icon" viewBox="0 0 512 512">
   <path d="M492 109.5c-17.4 7.7-36 12.9-55.6 15.3 20-12 35.4-31 42.6-53.6-18.7 11.1-39.4 19.2-61.5 23.5C399.8 75.8 374.6 64 346.8 64c-53.5 0-96.8 43.4-96.8 96.9 0 7.6.8 15 2.5 22.1-80.5-4-151.9-42.6-199.6-101.3-8.3 14.3-13.1 31-13.1 48.7 0 33.6 17.1 63.3 43.1 80.7C67 210.7 52 206.3 39 199v1.2c0 47 33.4 86.1 77.7 95-8.1 2.2-16.7 3.4-25.5 3.4-6.2 0-12.3-.6-18.2-1.8 12.3 38.5 48.1 66.5 90.5 67.3-33.1 26-74.9 41.5-120.3 41.5-7.8 0-15.5-.5-23.1-1.4C62.9 432 113.8 448 168.4 448 346.6 448 444 300.3 444 172.2c0-4.2-.1-8.4-.3-12.5 18.9-13.7 35.3-30.8 48.3-50.2z"/>
   </symbol>
+
+  <symbol id="search-icon" viewBox="0 0 48 48">
+  <path d="M31 28h-1.59l-.55-.55C30.82 25.18 32 22.23 32 19c0-7.18-5.82-13-13-13S6 11.82 6 19s5.82 13 13 13c3.23 0 6.18-1.18 8.45-3.13l.55.55V31l10 9.98L40.98 38 31 28zm-12 0c-4.97 0-9-4.03-9-9s4.03-9 9-9 9 4.03 9 9-4.03 9-9 9z"/>
+  <path d="M0 0h48v48H0z" fill="none"/>
+  </symbol>
 </svg>
+
+
 
 <table id="colorsTable" style="display: none">
   <thead>
