@@ -1,4 +1,4 @@
-![Logo](logo-small.png)
+![Sorted CSS Colors Logo](logo-small.png)
 
 # Sorted CSS Colors
 
@@ -6,7 +6,7 @@ I wanted to create a tool to sort the named CSS colors in a way that it shows re
 
 Here's how it looks:
 
-![Screenshot](kapture.gif)
+![Screen Capture showing how to sort the named css colors](kapture.gif)
 
 It's a Progressive Web App! It works both in mobile and desktop, even offline. If you liked the tool I suggest adding it to your home screen / downloading it as desktop app, so you can easily access it whenever you need. Also, please feel free to report any bugs or provide feedbacks by [creating issues](https://github.com/scriptype/sorted-colors/issues).
 
