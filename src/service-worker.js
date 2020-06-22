@@ -1,5 +1,5 @@
 const Config = {
-  cacheName: 'v/earth'
+  cacheName: 'v/mars'
 }
 
 const filesToCache = [
