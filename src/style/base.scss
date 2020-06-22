@@ -19,3 +19,10 @@ body {
   top: -2vmin;
   left: -2vmin;
 }
+
+@keyframes appear {
+  to {
+    transform: scale(1, 1);
+    opacity: 1;
+  }
+}

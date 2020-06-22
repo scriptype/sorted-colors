@@ -15,7 +15,13 @@
   transition: all .3s;
   background: -webkit-gradient(linear, left top, right top, from(#f07575), color-stop(8.3%, #f0b375), color-stop(16.6%, #f0f075), color-stop(25%, #b3f075), color-stop(33.3%, #75f075), color-stop(41.6%, #75f0b3), color-stop(50%, #75f0f0), color-stop(58.3%, #75b3f0), color-stop(66.6%, #7575f0), color-stop(75%, #b375f0), color-stop(83.3%, #f075f0), color-stop(91.6%, #f075b3), to(#f07575));
   background: -o-linear-gradient(left, #f07575 0%, #f0b375 8.3%, #f0f075 16.6%, #b3f075 25%, #75f075 33.3%, #75f0b3 41.6%, #75f0f0 50%, #75b3f0 58.3%, #7575f0 66.6%, #b375f0 75%, #f075f0 83.3%, #f075b3 91.6%, #f07575 100%);
-  background: linear-gradient(to right, #f07575 0%, #f0b375 8.3%, #f0f075 16.6%, #b3f075 25%, #75f075 33.3%, #75f0b3 41.6%, #75f0f0 50%, #75b3f0 58.3%, #7575f0 66.6%, #b375f0 75%, #f075f0 83.3%, #f075b3 91.6%, #f07575 100%); }
+  background: linear-gradient(to right, #f07575 0%, #f0b375 8.3%, #f0f075 16.6%, #b3f075 25%, #75f075 33.3%, #75f0b3 41.6%, #75f0f0 50%, #75b3f0 58.3%, #7575f0 66.6%, #b375f0 75%, #f075f0 83.3%, #f075b3 91.6%, #f07575 100%);
+  -webkit-transform: scale(0.7, 0.6);
+  -ms-transform: scale(0.7, 0.6);
+  transform: scale(0.7, 0.6);
+  opacity: .1;
+  -webkit-animation: appear .3s forwards;
+  animation: appear .3s forwards; }
   .hue-slider.mono {
     background: -webkit-gradient(linear, left top, left bottom, from(#444), to(#111));
     background: -o-linear-gradient(top, #444 0%, #111 100%);

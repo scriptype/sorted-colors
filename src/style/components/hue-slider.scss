@@ -25,6 +25,9 @@
     hsl(330, 80%, 70%) 91.6%,
     hsl(360, 80%, 70%) 100%
   );
+  transform: scale(.7, .6);
+  opacity: .1;
+  animation: appear .3s forwards;
 
   &.mono {
     background: linear-gradient(

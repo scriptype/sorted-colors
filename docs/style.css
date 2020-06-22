@@ -58,6 +58,18 @@ body {
   top: -2vmin;
   left: -2vmin; }
 
+@-webkit-keyframes appear {
+  to {
+    -webkit-transform: scale(1, 1);
+    transform: scale(1, 1);
+    opacity: 1; } }
+
+@keyframes appear {
+  to {
+    -webkit-transform: scale(1, 1);
+    transform: scale(1, 1);
+    opacity: 1; } }
+
 .back-icon {
   width: 16px;
   height: 16px; }
@@ -171,7 +183,13 @@ body {
   transition: all .3s;
   background: -webkit-gradient(linear, left top, right top, from(#f07575), color-stop(8.3%, #f0b375), color-stop(16.6%, #f0f075), color-stop(25%, #b3f075), color-stop(33.3%, #75f075), color-stop(41.6%, #75f0b3), color-stop(50%, #75f0f0), color-stop(58.3%, #75b3f0), color-stop(66.6%, #7575f0), color-stop(75%, #b375f0), color-stop(83.3%, #f075f0), color-stop(91.6%, #f075b3), to(#f07575));
   background: -o-linear-gradient(left, #f07575 0%, #f0b375 8.3%, #f0f075 16.6%, #b3f075 25%, #75f075 33.3%, #75f0b3 41.6%, #75f0f0 50%, #75b3f0 58.3%, #7575f0 66.6%, #b375f0 75%, #f075f0 83.3%, #f075b3 91.6%, #f07575 100%);
-  background: linear-gradient(to right, #f07575 0%, #f0b375 8.3%, #f0f075 16.6%, #b3f075 25%, #75f075 33.3%, #75f0b3 41.6%, #75f0f0 50%, #75b3f0 58.3%, #7575f0 66.6%, #b375f0 75%, #f075f0 83.3%, #f075b3 91.6%, #f07575 100%); }
+  background: linear-gradient(to right, #f07575 0%, #f0b375 8.3%, #f0f075 16.6%, #b3f075 25%, #75f075 33.3%, #75f0b3 41.6%, #75f0f0 50%, #75b3f0 58.3%, #7575f0 66.6%, #b375f0 75%, #f075f0 83.3%, #f075b3 91.6%, #f07575 100%);
+  -webkit-transform: scale(0.7, 0.6);
+  -ms-transform: scale(0.7, 0.6);
+  transform: scale(0.7, 0.6);
+  opacity: .1;
+  -webkit-animation: appear .3s forwards;
+  animation: appear .3s forwards; }
   .hue-slider.mono {
     background: -webkit-gradient(linear, left top, left bottom, from(#444), to(#111));
     background: -o-linear-gradient(top, #444 0%, #111 100%);
@@ -221,7 +239,13 @@ body {
   width: 24px;
   height: 24px;
   margin-left: 2vmin;
-  cursor: pointer; }
+  cursor: pointer;
+  -webkit-transform: scale(0.7, 0.6);
+  -ms-transform: scale(0.7, 0.6);
+  transform: scale(0.7, 0.6);
+  opacity: 0;
+  -webkit-animation: appear 0.3s 0.1s forwards cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation: appear 0.3s 0.1s forwards cubic-bezier(0.34, 1.56, 0.64, 1); }
   .mono-toggle::after {
     content: "";
     position: absolute;

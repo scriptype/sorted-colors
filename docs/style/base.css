@@ -25,3 +25,15 @@ body {
   padding: 2vmin;
   top: -2vmin;
   left: -2vmin; }
+
+@-webkit-keyframes appear {
+  to {
+    -webkit-transform: scale(1, 1);
+    transform: scale(1, 1);
+    opacity: 1; } }
+
+@keyframes appear {
+  to {
+    -webkit-transform: scale(1, 1);
+    transform: scale(1, 1);
+    opacity: 1; } }
