@@ -121,7 +121,7 @@ test('Colors.filterColorsByHue', async t => {
    * This is prepared to assert that
    * - Saturation and lightness is irrelevant,
    * - Order of colors is irrelevant,
-   * - any ONLY hue and tolerance should play role
+   * - and ONLY hue and tolerance should play role
    */
   const colorList = [
     { hsl: [60, 70, 60] }, // Group A, hue 60 will get them (tol: 5)
@@ -332,7 +332,7 @@ test('Colors.groupColorsByLightness', async t => {
 /*
  * Group colors should:
  * - Eliminate either colorful colors or monochromes, depending on "mono" option,
- * - Choose colors whose hue is close enough ("toleratable") to "hue" option,
+ * - Choose colors whose hue is close enough ("tolerable") to "hue" option,
  * - Group remaining colors by their lightness,
  * - Inside groups, sort colors by their saturation.
  */
