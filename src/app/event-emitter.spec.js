@@ -5,6 +5,8 @@ test('EventEmitter.listen', async t => {
   const dom = await loadDOM()
   const { EventEmitter: createEventEmitter } = dom.window.modules
 
+  t.plan(1)
+
   const myEventEmitter = createEventEmitter()
 
   const testPayload = { test: 'pass' }
