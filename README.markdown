@@ -1,4 +1,4 @@
-![Sorted CSS Colors Logo](logo-small.png)
+![Sorted CSS Colors Animated Logo](640x480-CSS-colors.gif)
 
 # Sorted CSS Colors
 
