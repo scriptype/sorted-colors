@@ -11,22 +11,18 @@ window.modules.Controller = (({
     Chart.render();
     HueControl.render();
   };
-
   const showColorInfo = colorId => {
     if (Chart.isDeactivating() || ColorInfo.isDeactivating()) {
       return;
     }
-
     Chart.activateColor(colorId);
     const color = Model.data.colorsData.find(c => c.name === colorId);
     ColorInfo.show(color);
   };
-
   const hideColorInfo = shouldFocusBack => {
     Chart.deactivateColor(shouldFocusBack);
     ColorInfo.hide();
   };
-
   const toggleMono = isOn => {
     const {
       hue,
@@ -39,14 +35,12 @@ window.modules.Controller = (({
     });
     hideColorInfo();
   };
-
   const setHue = hue => {
     Model.update({
       hue
     });
     hideColorInfo();
   };
-
   GlobalEvents.onKeyUp('escape', () => {
     if (ColorInfo.isActive()) {
       hideColorInfo(true);

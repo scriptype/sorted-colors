@@ -16,13 +16,11 @@ window.modules.views.ColorInfo = (({
   const props = {
     onClose: () => {}
   };
-
   const setup = ({
     onClose
   }) => {
     props.onClose = onClose;
   };
-
   const show = color => {
     const {
       type,
@@ -65,7 +63,7 @@ window.modules.views.ColorInfo = (({
           id="close-color-info"
         >
           <svg class="back-icon" role="img" alt="back icon">
-            <use xlink:href="#back-icon"></use>
+            <use xlink:href="#back-symbol"></use>
           </svg>
           back
         </button>
@@ -87,7 +85,6 @@ window.modules.views.ColorInfo = (({
       queryAll('.marquee', dom.colorInfo).forEach(item => {
         const width = item.offsetWidth;
         const widthDiff = containerWidth - width;
-
         if (widthDiff < 0) {
           item.classList.add('marquee-active');
           item.style.setProperty('--marquee-amount', `${widthDiff}px`);
@@ -95,7 +92,6 @@ window.modules.views.ColorInfo = (({
       });
     });
   };
-
   const hide = () => {
     dom.colorInfo.inert = true;
     dom.colorInfo.classList.add('deactivating');
@@ -104,11 +100,8 @@ window.modules.views.ColorInfo = (({
       dom.colorInfo.classList.remove('deactivating');
     });
   };
-
   const isActive = () => dom.colorInfo.classList.contains('active');
-
   const isDeactivating = () => dom.colorInfo.classList.contains('deactivating');
-
   return {
     setup,
     show,

@@ -55,7 +55,7 @@ window.modules.views.ColorInfo = (({
           id="close-color-info"
         >
           <svg class="back-icon" role="img" alt="back icon">
-            <use xlink:href="#back-icon"></use>
+            <use xlink:href="#back-symbol"></use>
           </svg>
           back
         </button>

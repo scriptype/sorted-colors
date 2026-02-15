@@ -10,7 +10,6 @@ window.modules.GlobalEvents = (({
       }
     });
   };
-
   return {
     onKeyUp
   };

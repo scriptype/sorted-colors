@@ -1,5 +1,5 @@
 const Config = {
-  cacheName: 'v/phobos'
+  cacheName: 'v/deimos'
 }
 
 const filesToCache = [

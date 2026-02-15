@@ -12,7 +12,6 @@ window.modules.views.HueControl = (({
     monoToggle: queryId('mono-toggle'),
     saturationAxis: queryId('saturation-axis')
   };
-
   const setup = ({
     onToggleMono,
     onChangeHue
@@ -26,7 +25,6 @@ window.modules.views.HueControl = (({
     });
     Model.listen('change', render);
   };
-
   const render = () => {
     const {
       tolerance,
@@ -37,18 +35,15 @@ window.modules.views.HueControl = (({
     dom.hueSlider.classList.toggle('mono', !!mono);
     dom.toleranceText.classList.toggle('hidden', !!mono);
     dom.saturationAxis.classList.toggle('hidden', !!mono);
-
     if (mono) {
       dom.hueValueDisplay.innerText = 0;
     } else {
       dom.hueValueDisplay.innerText = hue;
     }
-
     dom.hueSlider.style.setProperty('--pos', sliderPos);
     dom.hueSlider.value = hue;
     dom.toleranceValueDisplay.innerHTML = tolerance;
   };
-
   return {
     setup,
     render

@@ -1,6 +1,7 @@
 const { src, dest, series } = require('gulp');
 const rename = require('gulp-rename');
 const del = require('del');
+const sass = require('sass');
 
 const { config } = require('../package.json');
 
@@ -27,8 +28,13 @@ function makeTask(opts) {
     }); // Make sure we include any additional files from the dist dir
 
     const pipes = pipe.map(processor => {
+      if (processor.require === 'gulp-sass') {
+        const gulpSass = require('gulp-sass');
+        const sassTask = gulpSass(sass);
+        return sassTask();
+      }
       const fn = require(processor.require);
-      return fn.apply(null, processor.args);
+      return fn.apply(null, processor.args || []);
     });
 
     if (opts.rename) {
@@ -36,18 +42,15 @@ function makeTask(opts) {
     }
 
     // Pipe the files through the all of the task's functions
-    return (
-      pipes
-        .reduce((stream, processor) => {
-          return stream.pipe(processor);
-        }, filesToModify)
+    const result = pipes.reduce((stream, processor) => {
+      return stream.pipe(processor);
+    }, filesToModify);
 
-        // Pipe the output to the destination
-        .pipe(
-          dest(config.distDir, {
-            sourcemaps: '.'
-          })
-        )
+    // Pipe the output to the destination
+    return result.pipe(
+      dest(config.distDir, {
+        sourcemaps: '.'
+      })
     );
   }
 

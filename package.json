@@ -52,10 +52,10 @@
     "gulp-inject-partials": "^1.0.5",
     "gulp-postcss": "^8.0.0",
     "gulp-rename": "^1.4.0",
-    "gulp-sass": "^4.0.2",
+    "gulp-sass": "^5.0.0",
     "jsdom": "^16.2.2",
-    "node-sass": "^4.12.0",
     "postcss-clamp": "^1.1.0",
+    "sass": "^1.97.3",
     "tap-spec": "github:scriptype/tap-spec",
     "tape": "^5.0.1",
     "tape-watch": "^2.3.0",
@@ -167,6 +167,5 @@
   },
   "browserslist": [
     "last 5 version"
-  ],
-  "dependencies": {}
+  ]
 }
